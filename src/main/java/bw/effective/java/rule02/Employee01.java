@@ -1,4 +1,4 @@
-package bw.effective.java.rule2;
+package bw.effective.java.rule02;
 
 import java.time.LocalDate;
 
@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * quddnr153@gmail.com
  * https://github.com/quddnr153
  */
-public class Employee02 {
+public class Employee01 {
     private long seq;
     private String id;
     private String name;
@@ -15,6 +15,32 @@ public class Employee02 {
     private String department;
     private LocalDate birthDay;
     private String sex;
+
+    public Employee01(long seq, String id, String name) {
+        this.seq = seq;
+        this.id = id;
+        this.name = name;
+    }
+
+    public Employee01(long seq, String id, String name, String position) {
+        this(seq, id, name);
+        this.position = position;
+    }
+
+    public Employee01(long seq, String id, String name, String position, String department) {
+        this(seq, id, name, position);
+        this.department = department;
+    }
+
+    public Employee01(long seq, String id, String name, String position, String department, LocalDate birthDay) {
+        this(seq, id, name, position, department);
+        this.birthDay = birthDay;
+    }
+
+    public Employee01(long seq, String id, String name, String position, String department, LocalDate birthDay, String sex) {
+        this(seq, id, name, position, department, birthDay);
+        this.sex = sex;
+    }
 
     public long getSeq() {
         return seq;

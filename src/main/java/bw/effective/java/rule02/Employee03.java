@@ -1,4 +1,4 @@
-package bw.effective.java.rule2;
+package bw.effective.java.rule02;
 
 import java.time.LocalDate;
 
