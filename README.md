@@ -289,3 +289,28 @@ public enum EnumSingleton {
 - 직렬화 (Serialization)가 자동 처리
 - 리플렉션 (Reflection)을 통한 공격에 안전
 
+---
+### Rule 4 객체 생성을 막을 때는 private 생성자를 사용하라
+---
+
+static method 나 static field 로 사용하기 위한 클래스를 만들 때가 있다.
+예를 들면 utility 클래스 들이다. 사실상, 이런 클래스 객체를 만들 필요가 없다.
+
+그렇다면 이런 Utility class 들은 어떻게 설계하면 좋을까?
+
+***Examples***
+java.lang.Math, java.lang.Arrays, java.util.Collections 들이 예가 되겠다.
+
+extends 할 필요가 없기에 final class 로 생성하고, 객체를 만들필요 없기에 생성자를 private 으로 선언해준다.
+
+```java
+public final class MyUtility {
+    private MyUtility() {
+        throw new AssertionError();
+    }
+
+    public static int plus(int x, int y) {
+        return x + y;
+    }
+}
+```
