@@ -253,3 +253,39 @@ public class Employee03 {
 ***주의할 점***
 만약 MyBatis 를 사용 중 이라면, Default constructor 는 필요할 테니 만들어 주자...
 
+---
+### Rule 3 private 생성자나 enum 자료형은 싱글턴 패턴을 따르도록 설계하라
+---
+
+***Singleton (싱글톤) 이란?***
+오직 한 개의 클래스 인스턴스만을 갖도록 보장하고, 이에 대한 전역적인 접근점을 제공한다. (GoF 참고)
+
+***Usage***
+- 클래스의 인스턴스가 오직 하나여야 함을 보장하고, 잘 정의된 접근점 (access point) 으로 모든 사용자가 접근할 수 있도록 해야 할 때
+- 유일한 인스턴스가 서브클래싱으로 확장되어야 하며, 자용자는 코드의 수정 없이 확장된 서브클래스의 인스턴스를 사용할 수 있어야 할 때
+
+***구현 방법***
+- Eager initialization
+- Static block initialization
+- Lazy initialization
+- Thread safe initialization
+- Bill Pugh Singleton (Initialization on demand holder idiom)
+- Enum initialization
+
+각 구현의 키워드 이므로 검색해서 장단점을 보도록하고, 여기서는 Enum initialization 에 대해서 살펴보겠다.
+
+```java
+public enum EnumSingleton {
+    INSTANCE;
+
+    public static EnumSingleton getInstance() {
+        return INSTANCE;
+    }
+}
+```
+
+위 같은 방법은
+- 간결하고
+- 직렬화 (Serialization)가 자동 처리
+- 리플렉션 (Reflection)을 통한 공격에 안전
+
