@@ -314,3 +314,81 @@ public final class MyUtility {
     }
 }
 ```
+
+---
+### Rule 5 불필요한 객체는 만들지 말라
+---
+
+기능적으로 동일한 객체는 필요할 때마다 만드는 것보다 재사용하는 편이 낫다.
+
+아래 예를 보자.
+
+```
+String s = new String("Do not");
+```
+
+위 문장은 실행될 때마다 String 객체를 만드는 쓸데없는 짓을 하고 있다.
+
+아래와 같이 사용하도록 하자
+
+```
+String s = "Like this";
+```
+
+***JDK 1.5 Autoboxing 의 안좋은 예***
+
+아래 코드의 문제점을 찾아보자
+
+```java
+public class Main {
+    private static int inefficientSum(int from, int to) {
+        if (from > to) {
+            throw new IllegalArgumentException("from must be less than to");
+        }
+
+        Integer sum = 0;
+
+        for (int i = from; i <= to; i++) {
+            sum += i;
+        }
+
+        return sum;
+    }
+}
+```
+
+primitive type 인 int i 가 Integer sum 과 더해지면서 autoboxing 작업으로 Integer 라는 객체가 생성되고 있다.
+
+
+Boxed type 을 사용해야할 경우가 아니라면,
+***객체 표현형 대신 기본 자료형을 사용하고, 생각지도 못한 자동 객체화가 발생하지 않도록 유의하자.***
+
+위 예제는 아래와 고치면 될것이다.
+
+```java
+public class Main {
+    private static int efficientSum(int from, int to) {
+        if (from > to) {
+            throw new IllegalArgumentException("from must be less than to");
+        }
+    
+        int sum = 0;
+        
+        for (int i = from; i<= to; i++) {
+            sum += i;
+        }
+    
+        return sum;
+    }
+    
+    private static int java8Sum(int from, int to) {
+        if (from > to) {
+            throw new IllegalArgumentException("from must be less than to");
+        }
+    
+        return IntStream.range(from, to + 1).sum();
+    }
+}
+```
+
+
