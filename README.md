@@ -391,4 +391,57 @@ public class Main {
 }
 ```
 
+---
+### Rule 8 equals 를 재정의할 때는 일반 규약을 따르라
+---
 
+equals 를 재정의할 필요 없는 경우:
+
+- 각각의 객체가 고유하다: ex, Thread
+- 클래스에 "논리적 동일성 (logical equality)" 검사 방법이 있건 없건 상관없다: ex, java.util.Random
+- 상위 클래스에서 재정의한 equals 가 하위 클래스에서 사용하기에도 적당하다: Set, List, Map 같은경우 Abstract (AbstractSet, AbstractList, AbstractMap) 클래스의 equals 사용
+
+***equals 를 재정의 해야할 때?***
+
+- Object equality (객체 동일성) 이 아닌 logical equality (논리적 동일성) 의 개념을 지원해야 할 때
+- 상위 클래스의 equals 가 하위 클래스의 필요를 충족하지 못할 때
+
+
+예를 들면, value class (값 클래스) 의 경우 logical equality 를 알기위 해 사용.
+
+또한, Map 의 Key 나 Set 의 원소로 사용할 수 있다.
+
+***Object class specification***
+
+The equals method implements an equivalence relation on non-null object references:
+
+- It is reflexive: for any non-null reference value x, x.equals(x) should return true.
+- It is symmetric: for any non-null reference values x and y, x.equals(y) should return true if and only if y.equals(x) returns true.
+- It is transitive: for any non-null reference values x, y, and z, if x.equals(y) returns true and y.equals(z) returns true, then x.equals(z) should return true.
+- It is consistent: for any non-null reference values x and y, multiple invocations of x.equals(y) consistently return true or consistently return false, provided no information used in equals comparisons on the objects is modified.
+- For any non-null reference value x, x.equals(null) should return false.
+
+The equals method for class Object implements the most discriminating possible equivalence relation on objects; that is, for any non-null reference values x and y, this method returns true if and only if x and y refer to the same object (x == y has the value true).
+
+Note that it is generally necessary to override the hashCode method whenever this method is overridden, so as to maintain the general contract for the hashCode method, which states that equal objects must have equal hash codes.
+
+음... 영어다... 한글로 다시보자
+
+- reflexive: 모든 객체는 자기 자신과 같아야 함
+- symmetric: x 와 y 가 같다면, x.equals(y) 와 y.equals(x) 둘다 참이다
+- transitive: 간단하게 x.equals(y), y.equals(z) 면 x.equals(z) 를 만족해야 함
+- consistent: x.equals(y) 가 true 이든 false 이든 상관없이 항상 동일한 값을 반환해야 함 (말그대로 객체가 변형되지 않았다면 일관성을 유지해야 한다)
+- non-nullity: null 과의 equals 비교는 항상 false 이다.
+
+***그렇다면 위와 같은 지침을 지키려면 어떻게 해야 할까?***
+
+1. == 연산자를 사용하여 equals 의 인자가 자기 자신인지 검사하라.
+2. instanceof 연산자를 사용하여 인자의 자료형이 정확한지 검사하라.
+3. equals 의 인자를 정확한 자료형으로 변환하라.
+4. "중요" 필드 각각이 인자로 주어진 객체의 해당 필드와 일치하는지 검사하라.
+5. equals 메서드 구현을 끝냈다면, 대칭성, 추이성, 일관성의 세 속성이 만족되는지 unit test 를 이용하여 검토하라.
+
+추가적으로,
+
+- equals 를 구현할 때는 hashCode 도 재정의하라
+- equals 메서드의 인자형을 Object 에서 다른 것으로 바꾸지 마라.
