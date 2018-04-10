@@ -445,3 +445,88 @@ Note that it is generally necessary to override the hashCode method whenever thi
 
 - equals 를 구현할 때는 hashCode 도 재정의하라
 - equals 메서드의 인자형을 Object 에서 다른 것으로 바꾸지 마라.
+
+---
+### Rule 9 equals 를 재정의할 때는 반드시 hashCode 도 재정의하라
+---
+
+***euqals 메서드를 재정의하는 클래스는 반드시 hashCode 메서드도 재정의 해야 한다.***
+
+아래는 Java api specification 의 내용이다:
+The general contract of hashCode is:
+- Whenever it is invoked on the same object more than once during an execution of a Java application, the hashCode method must consistently return the same integer, provided no information used in equals comparisons on the object is 
+modified. This integer need not remain consistent from one execution of an application to another execution of the same application.
+- If two objects are equal according to the equals(Object) method, then calling the hashCode method on each of the two objects must produce the same integer result.
+- It is not required that if two objects are unequal according to the equals(java.lang.Object) method, then calling the hashCode method on each of the two objects must produce distinct integer results. However, the programmer should be 
+aware that producing distinct integer results for unequal objects may improve the performance of hash tables.
+
+As much as is reasonably practical, the hashCode method defined by class Object does return distinct integers for distinct objects. (This is typically implemented by converting the internal address of the object into an integer, but this implementation technique is not required by the Java™ programming language.)
+
+***hashCode 를 재정의하지 않으면 위반되는 핵심 규약은 두번째다. 같은 객체는 같은 해시 코드 값을 가져야 한다는 규약이 위반된다.***
+
+다행히도 JDK 1.8 (java 8) 부터는 java.util.Objects 클래스에서 아래와 같이 hash method 를 제공한다.
+
+```java
+public class Employee {
+    private long seq;
+    private String id;
+    private String name;
+    private String email;
+
+    private Employee(Builder builder) {
+        this.seq = builder.seq;
+        this.id = builder.id;
+        this.name = builder.name;
+        this.email = builder.email;
+    }
+
+    public static class Builder {
+        private long seq;
+        private String id;
+        private String name;
+        private String email;
+
+        public Builder(long seq, String id) {
+            this.seq = seq;
+            this.id = id;
+        }
+
+        public Builder withName(final String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withEmail(final String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Employee build() {
+            return new Employee(this);
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Employee)) {
+            return false;
+        }
+
+        Employee employee = (Employee) o;
+
+        return seq == employee.seq &&
+                Objects.equals(id, employee.id) &&
+                Objects.equals(name, employee.name) &&
+                Objects.equals(email, employee.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(seq, id, name, email);
+    }
+}
+```
