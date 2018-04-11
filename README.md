@@ -530,3 +530,24 @@ public class Employee {
     }
 }
 ```
+
+
+---
+### Rule 10 toString 은 항상 재정의하라
+---
+
+java.lang.Object 클래스의 toString 은
+
+클래스 이름 + @ + 16진수로 표현된 해시 코드
+
+이다.
+
+Java spec 을 보면
+
+"Returns a string representation of the object. In general, the toString method returns a string that "textually represents" this object. The result should be a concise but informative representation that is easy for a person to read. It is recommended that all subclasses override this method."
+
+와 같이 나온다.
+
+for a person to read !!! 사람이 읽기 쉽도록 informative 한 표현을 제공해라
+
+***가능하다면 toString method 는 객체 내의 중요 정보를 전부 담아 반환해야 한다.***
