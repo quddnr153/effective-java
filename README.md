@@ -551,3 +551,29 @@ Java spec 을 보면
 for a person to read !!! 사람이 읽기 쉽도록 informative 한 표현을 제공해라
 
 ***가능하다면 toString method 는 객체 내의 중요 정보를 전부 담아 반환해야 한다.***
+
+---
+### Rule 12 Comparable 구현을 고려하라
+---
+
+Comparable 인터페이스를 구현하는 클래스의 객체들은 자연적 순서 (natural ordering) 를 갖게 된다.
+
+장점:
+- Arrays.sort(a) 와 같이 객체들의 배열을 정렬하는 것이 매우 간다.
+- 검색하거나 최대/최소치를 계산하기도 간단
+- 다양한 제네릭 알고리즘 및 Comparable 인터페이스를 이용하도록 작성된 컬렉션 구현체와도 전부 연동 가능
+
+따라서,
+알파벳 순서나 값의 크기, 또는 시간적 선후관계처럼 명확한 자연적 순서를 따르는 값 클래스를 구현할 때는 Comparable 인터페이스를 구현할 것을 반드시 고려해 봐야 한다.
+
+Comparable 인터페이스의 compareTo method 의 규약은 아래와 같다
+
+> Compares this object with the specified object for order. Returns a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
+The implementor must ensure sgn(x.compareTo(y)) == -sgn(y.compareTo(x)) for all x and y. (This implies that x.compareTo(y) must throw an exception iff y.compareTo(x) throws an exception.)
+The implementor must also ensure that the relation is transitive: (x.compareTo(y)>0 && y.compareTo(z)>0) implies x.compareTo(z)>0.
+Finally, the implementor must ensure that x.compareTo(y)==0 implies that sgn(x.compareTo(z)) == sgn(y.compareTo(z)), for all z.
+It is strongly recommended, but not strictly required that (x.compareTo(y)==0) == (x.equals(y)). Generally speaking, any class that implements the Comparable interface and violates this condition should clearly indicate this fact. The recommended language is "Note: this class has a natural ordering that is inconsistent with equals."
+In the foregoing description, the notation sgn(expression) designates the mathematical signum function, which is defined to return one of -1, 0, or 1 according to whether the value of expression is negative, zero or positive.
+
+
+
