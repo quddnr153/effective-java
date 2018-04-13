@@ -576,4 +576,29 @@ It is strongly recommended, but not strictly required that (x.compareTo(y)==0) =
 In the foregoing description, the notation sgn(expression) designates the mathematical signum function, which is defined to return one of -1, 0, or 1 according to whether the value of expression is negative, zero or positive.
 
 
+---
+### Rule 13 클래스와 멤버의 접근 권한은 최소화하라
+---
+
+***What is Information Hiding or Encapsulation?***
+> Information hiding (정보은닉): 모듈 내부의 데이터를 비롯한 구현 세부사항을 Client 는 알 필요 없다 (감춰라)
+
+> Encapsulation (캡슐화): 일반적으로 연관 있는 멤버변수와 멤버함수를 클래스로 묶는 작업
+
+
+***Why is it important?***
+
+정보 은닉은 시스템을 구성하는 모듈 사이의 ***의존성을 낮춰서 (decouple)***, 각자 개별적으로 개발하고, 시험하고, 최적화하고, 이해하고, 변경할 수 있도록 한다는 사실에 기초
+
+***원칙들***
+
+1. 각 클래스와 멤버는 가능한 한 접근 불가능하도록 만들어라
+2. 객체 필드 (instance field) 는 절대로 public 으로 선언하면 안된다.
+3. 길이가 0 아닌 배열은 언제나 변경 가능하므로, public static final 배열필드를 두거나, 배열 필드를 반환하는 접근자 (accessor) 를 정의하면 안 된다.
+
+요약하면,
+- 최소한의 public API 를 설계한 다음, 다른 모든 클래스, 인터페이스, 멤버는 API 에서 제외
+- public static final 필드를 제외한 어떤 필드도 public 으로 선언하지 말기
+- public static final 필드가 참조하는 객체는 변경 불가능 객체로 만들기
+
 
