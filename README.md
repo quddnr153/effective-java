@@ -601,4 +601,10 @@ In the foregoing description, the notation sgn(expression) designates the mathem
 - public static final 필드를 제외한 어떤 필드도 public 으로 선언하지 말기
 - public static final 필드가 참조하는 객체는 변경 불가능 객체로 만들기
 
+---
+### Rule 14 public 클래스 안에는 public 필드를 두지 말고 접근자 메서드를 사용하라
+---
 
+음... 이부분은 class 를 만드는 가장 기본적인 규칙이다.
+
+public class 는 변경 가능 fields 를 외부로 공개하면 안 된다.
