@@ -658,3 +658,17 @@ immutable class 의 대표적인 예는 java.lang.String 이다.
 요약하자면,
 - 계승은 강력한 도구이지만 캡슐화 원칙을 침해하므로 문제를 발생시킬 소지가 있음
 - 상튀 클래스와 하위 클래스 사이에 IS-A 관계가 있을 때만 사용
+
+---
+### Abstract class 대신 Interface 를 사용하라
+---
+
+- 이미 있는 클래스를 개조해서 새로운 인터페이스를 구현하도록 하는 것은 간단하다.
+- 인터페이스는 mixin (믹스인) 을 정의하는 데 이상적이다.
+
+***mixin is a class that contains methods for ues by other classes without having to be the parent class of those other classes.***
+
+- 인터페이스는 비 계층적인 (nonhierarchical) 자료형 프레임워크 (type framework) 를 만들 수 있도록 한다.
+- 인터페이스를 사용하면 wrapper class idiom 을 통해 (Rule 16) 안전하면서도 강력한 기능 개선이 가능하다.
+
+
