@@ -671,4 +671,19 @@ immutable class 의 대표적인 예는 java.lang.String 이다.
 - 인터페이스는 비 계층적인 (nonhierarchical) 자료형 프레임워크 (type framework) 를 만들 수 있도록 한다.
 - 인터페이스를 사용하면 wrapper class idiom 을 통해 (Rule 16) 안전하면서도 강력한 기능 개선이 가능하다.
 
+---
+### 인터페이스는 자료형을 정의할 때만 사용하라
+---
 
+인터페이스를 구현하는 클래스를 만들게 되면, 그 인터페이스는 해당 클래스의 객체를 참조할 수 있는 자료형 (type) 역할을 하게 된다.
+
+```java
+public interface PhysicalConstants {
+    static final double AVOGADROS_NUMBER = 6.02214199e23;
+    static final double BOLTZMANN_CONSTANT = 1.3806503e-23;
+}
+```
+
+위와 같은 상수 인터페이스 패턴은 인터페이스를 잘못 사용한 예이다.
+
+따라서, 인터페이스는 자료형을 정의할 때만 사용해야 한다. 특정 상수를 API 의 일부로 공개할 목적으로는 적절치 않다.
