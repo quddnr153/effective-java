@@ -698,3 +698,39 @@ SRP 를 어기는 클래스들이라고 생각하면 될것이다.
 
 - 태그 기반 클래스는 너저분한데다 오류 발생 가능성이 높고, 효율적이지도 않다 (여러 분기가 사용되고, 태그에 따라 필요없는 필드들을 가지고 있다)
 
+---
+### Rule 21 전략을 표현하고 싶을 때는 함수 객체를 사용하라
+---
+
+***Strategy pattern***
+동일 계열의 알고리즘군을 정의하고, 각 알고리즘을 캡슐화하며, 이들을 상호교환이 가능하도록 만든다.
+
+알고리즘을 사용하는 클라이언트와 상관없이 독립적으로 알고리즘을 다양하게 변경할 수 있게 한다.
+
+***Function Object***
+A function object is a construct allowing an object to be invoked or called as if it were an ordinary function, usually with the same syntax (a function parameter that can also be a function). Function objects are often called functors 
+[wikipedia](https://en.wikipedia.org/wiki/Function_object).
+
+위 말을 요약하자면,
+
+함수 객체의 조된 용도는 strategy pattern 을 구현하는 것이다.
+자바로 이 패턴을 구형하기 위해서는 전략을 표현하는 인터페이스를 선언하고, 실행 가능 전략 클래스가 전부 해당 인터페이스를 구현하도록 해야 한다.
+보통 익명 클래스 객체로 구현하지만 반복적으로 사용한다면 ```private static``` 멤버 클래스로 전략을 표현한 다음, 전략 인터페이스가 자료형인 ```public static final``` 필드를 통해 외부에 공개하는 것이 바람직 하다.
+
+아래는 전략 패턴 사용의 예이다.
+
+```java
+public class StrategyPattern {
+    public static void main(String[] args) {
+        List<String> books = Arrays.asList("effective java", "refactoring", "design patterns");
+
+        books.sort(Comparator.comparingInt(String::length));
+
+        System.out.println(books);
+
+        books.sort(Comparator.naturalOrder());
+
+        System.out.println(books);
+    }
+}
+```
