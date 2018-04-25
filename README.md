@@ -734,3 +734,18 @@ public class StrategyPattern {
     }
 }
 ```
+
+---
+### rule 24 unchecked warning 을 제거하라
+---
+
+제네릭으로 프로그래밍을 하다 보면 많은 컴파일러 경고 메시지를 보게 된다.
+
+경고는 그대로 둬서 좋을게 하나도 없다고 본다.
+
+그래서 아래와 같은 지침이 있다.
+
+- 모든 무점검 경고는, 가능하다면 없애야 한다
+- 제거할 수 없는 경고 메시지는 형 안전성이 확실할 때만 ```@SuppressWarnings("unchecked")``` annotation 을 사용해 억제해라
+- SuppressWarnings annotation 은 가능한 한 작은 범위에 적용하라 (지역 변수 > 메소드 > 클래스 와 같이 다양하게 적용 가능)
+- @SuppressWarings("unchecked") 어노테이션을 사용할 때마다, 왜 형 안전성을 위반하지 않는지 밝히는 주석을 반드시 붙여라 (코드 이해)
