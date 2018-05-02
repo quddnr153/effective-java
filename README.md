@@ -799,3 +799,27 @@ Orthogonality (직교성) 향상으로 줄여보자 (ex, java.util.List -> subLi
 - 인자 자료형으로는 클래스보다 인터페이스가 좋다 (rule 52).
 
 - 인자 자료형으로 boolean 을 쓰는 것보다는, 원소가 2 개인 enum 자료형을 쓰는 것이 낫다.
+
+---
+### rule 43 null 대신 빈 배열이나 컬렉션을 반환하라
+---
+
+null 을 반환할 우려가 있는 method 들은 client 가 null check 를 해줘야 한다.
+
+과연 이런 불필요한 작업을 해야할까?
+
+boilerplate code 는 우리의 주적이다. 대부분의 개발자는 똑같은 일을 반복하기 싫어한다.
+
+매번 api 의 결과 값이 null 일까 확인하는 것은 아주 큰 낭비이다.
+
+그렇기 때문에 null 을 반환하기 보다는 빈 Collection 혹은 빈 객체를 반환하라.
+
+***다른 주장으로 배열 할당을 피할 수 있으니 null을 반환해야 바람직한 것 아니냐는 사람이있다.***
+
+하지만, "premature optimization is the root of all evil" 라는 말을 들어봤을 것이다.
+
+성능 저하의 주범이라는 것이 밝혀지지 않는 한, 그런 수준까지 성능 걱정을 하는 것은 바람직하지 않다.
+
+또한, 길이가 0인 배열은 immutable 하므로 아무 제약 없이 재사용할 수 있다.
+
+```Collections.emptySet()``` 와 같이 사용하면 된다.
