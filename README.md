@@ -823,3 +823,15 @@ boilerplate code 는 우리의 주적이다. 대부분의 개발자는 똑같은
 또한, 길이가 0인 배열은 immutable 하므로 아무 제약 없이 재사용할 수 있다.
 
 ```Collections.emptySet()``` 와 같이 사용하면 된다.
+
+---
+### rule 45 지역 변수의 유효범위를 최소화하라
+---
+
+지역 변수의 유효범위를 최소화하면 readability 와 maintainability 가 좋아지고 오류 발생 가능성도 줄어든다.
+
+- 지역 변수의 유효범위를 최소화하는 가장 강력한 기법은, 처음으로 사용하는 곳에서 선언하는 것이다.
+
+- 거의 모든 지역 변수 선언에는 initailizer (초기값) 이 포함되어야 한다.
+
+- 메서드의 크기를 줄이고 특정한 기능에 집중하라 (SRP - single responsibility principle).
