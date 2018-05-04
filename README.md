@@ -835,3 +835,13 @@ boilerplate code 는 우리의 주적이다. 대부분의 개발자는 똑같은
 - 거의 모든 지역 변수 선언에는 initailizer (초기값) 이 포함되어야 한다.
 
 - 메서드의 크기를 줄이고 특정한 기능에 집중하라 (SRP - single responsibility principle).
+
+---
+### rule 47 어떤 라이브러리가 있는지 파악하고, 적절히 활용하라
+---
+
+***Do not reinvent the wheel*** (바퀴를 다시 만들지 말라.)
+
+대부분 우리가 원하는 기능은 다 만들어져 있다. customizing 이 필요한 business 가 아니라면 잘 알려진 라이브러리를 활용하자. 그것들은 테스트가 잘 되었고, 문제가 있다면 다음 버전에서 고쳐질 것이다.
+
+특히, java api 들은 어느정도 잘 알고 있어야한다. java.util, java.lang, java.io 등 자주 사용하는 api 는 확실히 알아두자.
