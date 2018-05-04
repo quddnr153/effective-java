@@ -845,3 +845,23 @@ boilerplate code 는 우리의 주적이다. 대부분의 개발자는 똑같은
 대부분 우리가 원하는 기능은 다 만들어져 있다. customizing 이 필요한 business 가 아니라면 잘 알려진 라이브러리를 활용하자. 그것들은 테스트가 잘 되었고, 문제가 있다면 다음 버전에서 고쳐질 것이다.
 
 특히, java api 들은 어느정도 잘 알고 있어야한다. java.util, java.lang, java.io 등 자주 사용하는 api 는 확실히 알아두자.
+
+---
+### rule 49 객체화된 기본 자료형 대신 기본 자료형을 이용하라
+---
+
+primitive type: int, double, boolean, 등
+
+boxed primitive type: Integer, Double, Boolean 등
+
+
+JDK 1.5 부터 autoboxing and auto-unboxing 지원
+
+- 차이점
+1. 기본 자료형은 값만 가지지만 객체화된 기본 자료형은 값 외에도 identity 를 가딘다.
+2. 기본 자료형에 저장되는 값은 전부 기능적으로 완전한 값 (fully functional value) 이지만, 객체화된 기본 자료형에 저장되는 값에는 null 도 존재할 수 있다.
+3. 기본 자료형은 시간이나 공간 요구량 측면에서 일반적으로 객체 표현형보다 효율적이다.
+
+***기본 자료형과 객체화된 기본 자료형을 한 연산 안에 역어 놓으면 객체화된 기본 자료형은 자동으로 기본 자료형으로 변환된다.***
+
+primitive 와 boxed type 을 같이 사용하면 NP (NullPointerException) 을 발생할 우려가 생긴다.
