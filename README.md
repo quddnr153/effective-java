@@ -896,3 +896,29 @@ String concatenation 을 할 때, 보통 + 연산자를 사용할 것이다. 당
 대안으로 StringBuilder 를 사용하라.
 
 성능 차이는 사용할 business logic 을 테스트 해보고 고려하는 것도 하나의 방법이다 (Test case 를 만들어라!).
+
+---
+### rule 52 객체를 참조할 때는 그 인터페이스를 사용하라
+---
+
+***인자, 반환값, 변수, 필드의 자료형은 클래스 대신 인터페이스로 선언하자.***
+
+```java
+class Main {
+    public static void main(String[] args){
+      // Good case
+      List<String> items = new ArrayList<>();
+      
+      // Bad case
+      ArrayList<String> items2 = new ArrayList<>();
+    }
+}
+```
+
+위 두경우는 객체의 실제 구현을 다른 것으로 바꾸고 싶을 때, 차이가 발생한다.
+
+인터페이스를 자료형으로 썼다면, 호출하는 생성자 이름만 다른 클래스로 바꾸거나, 호출하는 정적 팩터리 메서드만 다른 것으로 바꾸면 된다.
+
+- 당연히 적당한 인터페이스가 없는 경우에는 객체를 클래스로 참조하는 것이 당연하다.
+
+String, BigInteger, Integer 와 같은 value class 와 같은 경우이다.
