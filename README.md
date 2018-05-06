@@ -1,5 +1,9 @@
 # effective-java-2e
 
+## Reference
+
+[Effective java 2rd](https://www.amazon.com/Effective-Java-2nd-Joshua-Bloch/dp/0321356683)
+
 ## Introduction
 Joshua Bloch 가 publish 한 Java engineer 의 필독서인 Effective Java 2/e 을 공부하며, 코드로 작성해보는 Repository 이다.
 
@@ -922,3 +926,44 @@ class Main {
 - 당연히 적당한 인터페이스가 없는 경우에는 객체를 클래스로 참조하는 것이 당연하다.
 
 String, BigInteger, Integer 와 같은 value class 와 같은 경우이다.
+
+---
+### rule 55 신중하게 최적화하라
+---
+
+- 최적화 관련 격언
+
+> More computing sins are committed in the name of efficienc (without necessarily achieving it) than for any other single reason - including blind stupidiy.
+> *William A. Wulf
+
+> We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. * Donald E. Knuth
+
+> We follow two rules in the matter of optimization:
+>
+> Rule 1. Don’t do it.
+>
+> Rule 2 (for experts only). Don’t do it yet—that is, not until you have a
+>
+> perfectly clear and unoptimized solution. *M. A. Jackson
+
+위 내용의 의미는 "최적화는 좋을 때보다 나쁠 때가 더 많으며, 섣불리 시도하면 더더욱 나쁘다는 것" 이다.
+
+- 즉, ***빠를 프로그램이 아닌, 좋은 프로그램을 만들려 노력하자***
+
+구현에서 생기는 문제는 나중에 최적화하면서 고칠 수 있지만, 성능을 제약하는 문제가 시스템에 만연한 구조적 결함이라면, 시스템 전부를 고치지 않고서는 문제를 해결할 수 없다.
+
+- 설계를 할 때는 성능을 제약할 가능성이 있는 결정들은 피하자
+
+모듈 간 상호작용이나 외부와의 상호작용을 명시하는 부분 (API, wire-level protocol, persistent data format)
+
+- API 를 설계할 때 내리는 결정들이 어떤 영향을 끼칠지를 생각하자
+
+- 최적화를 시도할 때마다, 전후 성능을 측정하고 비교하자
+
+profiling tool 을 활용하면 어디를 최적화할지 좀 더 쉽게 결정할 수 있다.
+
+---
+업무에서 최적화라는 말은 사용해 본 적이 거의 없다. 위에 정리한 내용과 같이 최적화는 좋은 설계 이후에 해야하는 작업인듯 하다. Real time 시스템과 같이 성능이 아주 중요한 요소인 시스템이 아닌 이상 성능을 먼저 고려하는 것은 설계를 망치게 돼 있다고 생각한다.
+
+우리가 지켜야 할 것은, 읽기 쉬운 코드를 작성하고 이를 통해 유지보수하기 쉽게 프로그램을 만드는 것이다.
+
