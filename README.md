@@ -967,3 +967,35 @@ profiling tool 을 활용하면 어디를 최적화할지 좀 더 쉽게 결정�
 
 우리가 지켜야 할 것은, 읽기 쉬운 코드를 작성하고 이를 통해 유지보수하기 쉽게 프로그램을 만드는 것이다.
 
+---
+### rule 56 일반적으로 통용되는 작명 관습을 따르라
+---
+
+[java language specification 6](https://docs.oracle.com/javase/specs/jls/se6/html/names.html#6.8)
+
+java 8 docs 에서는 위에 해당하는 chapter 를 못 참음...
+
+***우리가 naming convention 을 중요하게 생각해야하는 이유가 있다.***
+
+- 유지보수
+
+관습을 잘 따랐다면, 이름의 의미를 알기 쉬워 유지보수 또한 쉬워진다.
+
+- 사용성
+
+API 를 사용할 때도 위와 마찬가지로 관습에 맞게 사용을 할 수 있다.
+
+- 예측가능
+
+만약 관습을 어겼다면, 코드를 이용하는 프로그래머는 혼란스워 할 뿐 아니라 오류로 이어질 잘못된 가정들을 하게 된다.
+
+
+---
+대부분은 specification 을 보거나, 본인 회사에서 사용하는 convention 을 따르겠지만, 하나만 집고 넘어가자.
+
+보통 boolean 을 반환하는 method 를 작명할때, is 라는 접미사를 붙인다.
+
+그렇다면, boolean field 는 어떻게 짓나?? 레거시 코드를 보면 위와 같이 is 라는 접미사가 붙은 field 가 많이 보인다.
+
+하지만, 그것 보다는 initialized, composite, complete 와 같은 형용사를 사용하는 것이 덜 혼란스럽다고 생각한다.
+
