@@ -1048,3 +1048,15 @@ API 를 사용할 때도 위와 마찬가지로 관습에 맞게 사용을 할 �
 | IndexOutOfBoundsException | Index parameter value is out of range |
 | ConcurrentModificationException | Concurrent modification of an object has been detected where it is prohibited |
 | UnsupportedOperationException | Object does not support method |
+
+---
+### rule 63 어떤 오류인지를 드러내는 정보를 상세한 메시지에 담으라
+---
+
+예외의 상세 메시지에는 원인 분석에 이용될 오류 정보가 포착되어 있어야 한다.
+
+- 오류 정보를 포착해 내기 위해서는, 오류의 상세 메시지에 "예외에 관계된" 모든 인자와 필드의 값을 포함시켜야 한다.
+
+---
+실제 업무에서 logging 라이브러리르 사용할 텐데, 우리가 error 에 대한 정보를 찍을 때는, 위와 같이 상세한 정보들을 포함 시켜야, 에러를 재현할 수 있고 이를 고칠 수 있게 된다.
+
