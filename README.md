@@ -1007,3 +1007,20 @@ API 를 사용할 때도 위와 마찬가지로 관습에 맞게 사용을 할 �
 
 - 잘 설계된 API 는 클라이언트에게 평상시 제어 흐름의 일부로 예외를 사용하도록 강요해서는 안 된다.
 
+---
+### rule 58 복구 가능 상태에는 점검지정 예외를 사용하고, 프로그래밍 오류에는 실행시점 예외를 사용하라
+---
+
+자바는 아래 세 가지 종류의 ```throwable``` 을 제공한다.
+
+1. checked exception
+2. runtime exception
+3. error
+
+아래는 위 세 가지를 언제 사용해야 하나를 guide 해준다.
+
+- caller 측에서 복구할 것으로 여겨지는 상황에 대해서는 checked exception 을 사용
+- 프로그래밍 오류를 표현할 때는 runtime exception 을 사용, 즉 runtime exception 을 던지는 경우는 위와 반대로 복구가 불가능한 상황이라는 뜻이다.
+- error 는 보통 더 이상 프로그램을 실행할 수 없는 상태에 도달했음을 알릴 때 사용, 보통 ERROR 의 하위 클래스는 새로 만들지 않는 것이 최선.
+- 사용자 정의 unchecked throwable 은 runtime exception 의 하위 클래스로 만들어야 한다.
+
