@@ -1024,3 +1024,27 @@ API 를 사용할 때도 위와 마찬가지로 관습에 맞게 사용을 할 �
 - error 는 보통 더 이상 프로그램을 실행할 수 없는 상태에 도달했음을 알릴 때 사용, 보통 ERROR 의 하위 클래스는 새로 만들지 않는 것이 최선.
 - 사용자 정의 unchecked throwable 은 runtime exception 의 하위 클래스로 만들어야 한다.
 
+---
+### rule 60 표준 예외를 사용하라
+---
+
+이미 자바에서는 기본적인 unchecked exception 이 정의 돼 있다.
+
+우리는 이를 가져다 쓰기만 하면 된다. 정말 특별한 경우 (API 를 설계할 때, 특정 예외를 던져야 할 경우) 가 아니라면, 재사용을 권장한다.
+
+그 이유로는
+
+- 배우기 쉽고 사용하기 편리한 API 를 만들 수 있다.
+- 가독성이 높다.
+- 예외 클래스 개수를 줄이면 프로그램의 메모리 요구량이 줄어들고, 클래스를 로딩하는 시간도 줄어든다. (여기까지는 실제로 의미 있는지는 모르겠다)
+
+가장 흔히 재사용하는 exception 들은 아래와 같다.
+
+| exception | usage |
+| --------- | ----- |
+| IllegalArgumentException | Non-null parameter value is inappropriate |
+| IllegalStateException | Object state is inappropriate for method invocation |
+| NullPointerException | Parameter value is null where prohibited |
+| IndexOutOfBoundsException | Index parameter value is out of range |
+| ConcurrentModificationException | Concurrent modification of an object has been detected where it is prohibited |
+| UnsupportedOperationException | Object does not support method |
