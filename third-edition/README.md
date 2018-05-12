@@ -19,3 +19,103 @@
 그렇다, small and simple 은 Clean Code 에서 말하는 읽기 쉬운 코드이며, test 하기도 쉽고, 변경하기도 쉬운 코드라고 보면된다.
 
 우리는 위 문장을 기억하고 effective java 를 읽어 나가면 되겠다.
+
+
+---
+## Chapter 2 Creating and Destroying Objects
+---
+
+---
+### rule 1 Consider static factory methods instead of constructors
+---
+
+사실 이 부분은 [2rd rule 1](https://github.com/quddnr153/effective-java/blob/master/second-edition/README.md#rule-1-%EC%83%9D%EC%84%B1%EC%9E%90-%EB%8C%80%EC%8B%A0-%EC%A0%95%EC%A0%81-%ED%8C%A9%ED%84%B0%EB%A6%AC-%EB%A9%94%EC%84%9C%EB%93%9C%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EB%8A%94%EC%A7%80-%EC%83%9D%EA%B0%81%ED%95%B4-%EB%B3%B4%EB%9D%BC) 과 전혀 다른 부분이 없다.
+
+추가 된 부분은 Java 8 에 대한 이야기 이다.
+
+Java 8 이전에는 interface 가 static method 를 가질 수 없었다. 하지만, Java 8 부터는 아래와 같이 가능해졌다.
+
+```java
+public class InterfaceWithStaticMethods {
+    public static void main(String[] args) {
+        // usage of static method 'of' in Stream interface
+        List<Integer> numbers = Stream.of(1, 2, 3, 4, 5).collect(Collectors.toList());
+
+        System.out.println(numbers);
+
+        // usage of static method 'reverseOrder' in Comparator interface
+        numbers.sort(Comparator.reverseOrder());
+
+        System.out.println(numbers);
+    }
+}
+```
+
+java.util, java.lang 등 Java 의 유용한 API 들에 static method 가 추가 되었다. 추가된 method 의 양이 방대하기에 하나하나 예를 들 순 없다.
+
+하지만 하나 팁이 있다면, java 의 data structure 를 다룰때, 어라 이런거 되려나? 라고 생각이 들면 일일히 API 를 찾아보거나, just google it 을 하면 유용한 method 들을 찾을 수 있다.
+
+하나만 더 예를 들면, 실무 (business logic) 에서는 Primitive value 를 자료구조로 만들지 않고 대부분, custom object 를 사용할 것이다 (Employee, Department, Seller 등).
+
+위 object 의 list 를 정렬한다고 생각해보자. 그럼 어떻게 했었나?? Java 8 이전에는 다른 라이브러리를 사용하지 않는다는 가정하에 ```if else if else if else.....``` 의 반복이 될 것을 상상한다.
+
+하지만, Java 8 에서는 아래와 같이 사용하면 아주 간단하게 해결된다.
+
+```java
+public class ComparatorInterfaceUsage {
+    public static void main(String[] args) {
+        Employee employee1 = new Employee("abcd", 10, 60);
+        Employee employee2 = new Employee("abcd", 11, 50);
+        Employee employee3 = new Employee("abcd", 9, 12);
+
+        List<Employee> employees = Arrays.asList(employee1, employee2, employee3);
+
+        System.out.println(employees);
+
+        // Comparator.comparing, .thenComparing, compare example
+        employees.sort((
+                (o1, o2) -> Comparator.comparing(Employee::getName)
+                        .thenComparing(Employee::getAge)
+                        .thenComparing(Employee::getWeight)
+                        .compare(o1, o2)
+        ));
+
+        System.out.println(employees);
+    }
+}
+
+class Employee {
+    private String name;
+    private int age;
+    private int weight;
+
+    public Employee(String name, int age, int weight) {
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Employee{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", age=").append(age);
+        sb.append(", weight=").append(weight);
+        sb.append('}');
+        return sb.toString();
+    }
+}
+```
+
