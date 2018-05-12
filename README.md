@@ -2,8 +2,8 @@
 
 ## Reference
 
-[Effective java 2rd](https://www.amazon.com/Effective-Java-2nd-Joshua-Bloch/dp/0321356683)
-[Effective java 3rd](https://www.amazon.com/Effective-Java-3rd-Joshua-Bloch/dp/0134685997)
+- [Effective java 2rd](https://www.amazon.com/Effective-Java-2nd-Joshua-Bloch/dp/0321356683)
+- [Effective java 3rd](https://www.amazon.com/Effective-Java-3rd-Joshua-Bloch/dp/0134685997)
 
 # Introduction
 
