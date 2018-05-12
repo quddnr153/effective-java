@@ -61,8 +61,7 @@ public class Employee {
 ### Rule 2 생성자 인자가 많을 때는 Builder 패턴 적용을 고려하라
 ---
 
-[Static factory method](https://github.com/quddnr153/effective-java-2e#rule-1-%EC%83%9D%EC%84%B1%EC%9E%90-%EB%8C%80%EC%8B%A0-%EC%A0%95%EC%A0%81-%ED%8C%A9%ED%84%B0%EB%A6%AC-%EB%A9%94%EC%84%9C%EB%93%9C%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%A0
--%EC%88%98-%EC%97%86%EB%8A%94%EC%A7%80-%EC%83%9D%EA%B0%81%ED%95%B4-%EB%B3%B4%EB%9D%BC) 나 Constructor 는 선택적 인자가 많은 상황에 잘 적응하지 못한다는 문제를 가지고 있다.
+[Static factory method](https://github.com/quddnr153/effective-java-2e#rule-1-%EC%83%9D%EC%84%B1%EC%9E%90-%EB%8C%80%EC%8B%A0-%EC%A0%95%EC%A0%81-%ED%8C%A9%ED%84%B0%EB%A6%AC-%EB%A9%94%EC%84%9C%EB%93%9C%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EB%8A%94%EC%A7%80-%EC%83%9D%EA%B0%81%ED%95%B4-%EB%B3%B4%EB%9D%BC) 나 Constructor 는 선택적 인자가 많은 상황에 잘 적응하지 못한다는 문제를 가지고 있다.
 
 예를 들면, 아래와 같은 예제를 보자
 
