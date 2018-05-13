@@ -119,3 +119,112 @@ class Employee {
 }
 ```
 
+---
+### rule 2 Consider a builder when faced with many constructor parameters
+---
+
+rule 2 도 second edition 과 예제 코드만 다르고 내용은 같다 ([second edition rule 2](https://github.com/quddnr153/effective-java/blob/master/second-edition/README.md#rule-2-%EC%83%9D%EC%84%B1%EC%9E%90-%EC%9D%B8%EC%9E%90%EA%B0%80-%EB%A7%8E%EC%9D%84-%EB%95%8C%EB%8A%94-builder-%ED%8C%A8%ED%84%B4-%EC%A0%81%EC%9A%A9%EC%9D%84-%EA%B3%A0%EB%A0%A4%ED%95%98%EB%9D%BC)).
+
+아래는 이전 예제와는 조금 다르게 사용하도록 해봤다.
+
+```java
+public class BuilderPatternUsage {
+    public static void main(String[] args) {
+        Employee employee = Employee.builder("quddnr153", "Byungwook Lee").withSex(Employee.Sex.MALE).build();
+
+        System.out.println(employee);
+    }
+}
+
+class Employee {
+    public enum Sex {
+        MALE, FEMALE, NONE
+    }
+
+    private long seq;
+    private String id;
+    private String name;
+    private String position;
+    private String department;
+    private LocalDate birthDay;
+    private Sex sex;
+
+    // Getter skip
+
+    private Employee(Builder builder) {
+        this.seq = builder.seq;
+        this.id = builder.id;
+        this.name = builder.name;
+        this.position = builder.position;
+        this.department = builder.department;
+        this.birthDay = builder.birthDay;
+        this.sex = builder.sex;
+    }
+
+    // id and name are required, others are optional
+    static Builder builder(final String id, final String name) {
+        return new Builder(id, name);
+    }
+
+    public static class Builder {
+        private long seq;
+        private String id;
+        private String name;
+        private String position;
+        private String department;
+        private LocalDate birthDay;
+        private Sex sex;
+
+        public Builder(final String id, final String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public Builder withSeq(final long seq) {
+            this.seq = seq;
+            return this;
+        }
+
+        public Builder withPosition(final String position) {
+            this.position = position;
+            return this;
+        }
+
+        public Builder withDepartment(final String department) {
+            this.department = department;
+            return this;
+        }
+
+        public Builder withBirthDay(final LocalDate birthDay) {
+            this.birthDay = birthDay;
+            return this;
+        }
+
+        public Builder withSex(final Sex sex) {
+            this.sex = sex;
+            return this;
+        }
+
+        public Employee build() {
+            return new Employee(this);
+        }
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Employee{");
+        sb.append("seq=").append(seq);
+        sb.append(", id='").append(id).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", position='").append(position).append('\'');
+        sb.append(", department='").append(department).append('\'');
+        sb.append(", birthDay=").append(birthDay);
+        sb.append(", sex=").append(sex);
+        sb.append('}');
+        return sb.toString();
+    }
+}
+```
+
+코드를 보면 domain 객체를 설계하기 좀 어려울 (?) 수 있지만, 사용자 입장에서 immutable 하고 readable 한 객체를 만들 수 있다는 장점이 있다고 생각한다 (require 한 field 와 optional 한 field 도 구분 가능, 물론 위에서 optional 한 값에 default 값을 넣을 수도 있다.).
+
