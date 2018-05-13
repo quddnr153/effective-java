@@ -245,3 +245,22 @@ class Employee {
 
 logging, configuration manager, database connection manager, etc...
 
+---
+### rule 4 Enforce noninstantiability with a private constructor
+---
+
+[same as second edition](https://github.com/quddnr153/effective-java/tree/master/second-edition#rule-4-%EA%B0%9D%EC%B2%B4-%EC%83%9D%EC%84%B1%EC%9D%84-%EB%A7%89%EC%9D%84-%EB%95%8C%EB%8A%94-private-%EC%83%9D%EC%84%B1%EC%9E%90%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%9D%BC)
+
+---
+Utility class 는 언제 만들까?
+
+- 당연히 잘 설계되고 테스트 된 Java API 혹은, [apache commons](https://commons.apache.org/) 를 활용하는 것이 가장 좋음
+- 하지만 domain specific 하게 필요할 때 custom 한 utility class 를 만들게 될 것이다.
+
+Utility class 를 만들게 된다면 주의해야 할 점이 있다
+
+- 공통 작업들을 넣으려고 utility class 를 만들어도, 그 utility class 는 oop 를 지켜야 한다!!
+
+모든 공통 작업들을 하나의 utility class 에 넣지말자...
+
+- utility class 는 stateless 해야 한다!!
