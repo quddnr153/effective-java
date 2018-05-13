@@ -228,3 +228,20 @@ class Employee {
 
 코드를 보면 domain 객체를 설계하기 좀 어려울 (?) 수 있지만, 사용자 입장에서 immutable 하고 readable 한 객체를 만들 수 있다는 장점이 있다고 생각한다 (require 한 field 와 optional 한 field 도 구분 가능, 물론 위에서 optional 한 값에 default 값을 넣을 수도 있다.).
 
+---
+### rule 3 Enforce the singleton property with a private constructor or an enum type
+---
+
+[same as second edition](https://github.com/quddnr153/effective-java/blob/master/second-edition/README.md#rule-3-private-%EC%83%9D%EC%84%B1%EC%9E%90%EB%82%98-enum-%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%80-%EC%8B%B1%EA%B8%80%ED%84%B4-%ED%8C%A8%ED%84%B4%EC%9D%84-%EB%94%B0%EB%A5%B4%EB%8F%84%EB%A1%9D-%EC%84%A4%EA%B3%84%ED%95%98%EB%9D%BC)
+
+음... 이 규칙은 정말로 2판과 완전히 똑같은 부분이다.
+
+---
+그렇다면 우리가 실무에서 정말 singleton 객체를 설계할 일이 있을까?
+
+솔직히 말하자면, 한번도 singleton 객체를 설계해 본 경험이 거의 없다고 본다 (Spring framework 에서 bean 관리를 해주기 때문에).
+
+물론 framework 를 자체 개발한다면, 자주 사용할 패턴이라고 생각이 한다.
+
+logging, configuration manager, database connection manager, etc...
+
