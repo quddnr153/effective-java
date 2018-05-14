@@ -467,7 +467,7 @@ As much as is reasonably practical, the hashCode method defined by class Object 
 
 ***hashCode 를 재정의하지 않으면 위반되는 핵심 규약은 두번째다. 같은 객체는 같은 해시 코드 값을 가져야 한다는 규약이 위반된다.***
 
-다행히도 JDK 1.8 (java 8) 부터는 java.util.Objects 클래스에서 아래와 같이 hash method 를 제공한다.
+다행히도 JDK 1.7 (java 7) 부터는 java.util.Objects 클래스에서 아래와 같이 hash method 를 제공한다.
 
 ```java
 public class Employee {
