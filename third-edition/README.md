@@ -1,5 +1,20 @@
 # effective-java-3e
 
+# Contents
+
+- [effective-java-3e](#effective-java-3e)
+- [Contents](#contents)
+  * [Reference](#reference)
+  * [Introduction](#introduction)
+  * [Chapter 2 Creating and Destroying Objects](#chapter-2-creating-and-destroying-objects)
+    + [rule 1 Consider static factory methods instead of constructors](#rule-1-consider-static-factory-methods-instead-of-constructors)
+    + [rule 2 Consider a builder when faced with many constructor parameters](#rule-2-consider-a-builder-when-faced-with-many-constructor-parameters)
+    + [rule 3 Enforce the singleton property with a private constructor or an enum type](#rule-3-enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type)
+    + [rule 4 Enforce noninstantiability with a private constructor](#rule-4-enforce-noninstantiability-with-a-private-constructor)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 ## Reference
 
 [Effective java 3rd](https://www.amazon.com/Effective-Java-3rd-Joshua-Bloch/dp/0134685997)
