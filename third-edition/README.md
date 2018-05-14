@@ -11,9 +11,10 @@
     + [rule 2 Consider a builder when faced with many constructor parameters](#rule-2-consider-a-builder-when-faced-with-many-constructor-parameters)
     + [rule 3 Enforce the singleton property with a private constructor or an enum type](#rule-3-enforce-the-singleton-property-with-a-private-constructor-or-an-enum-type)
     + [rule 4 Enforce noninstantiability with a private constructor](#rule-4-enforce-noninstantiability-with-a-private-constructor)
+    + [rule 5 Prefer dependency injection to hardwiring resources](#rule-5-prefer-dependency-injection-to-hardwiring-resources)
+    + [rule 6 Avoid creating unnecessary objects](#rule-6-avoid-creating-unnecessary-objects)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 
 ## Reference
 
@@ -322,3 +323,50 @@ Java 에서 DI framework 로는
 DI framework 중 대부분 실무에서 Spring 을 많이 사용할 것이다.
 
 그래도 위 세 가지 framework 를 비교한 argument 를 참조해 보자 ([see more](https://stackoverflow.com/questions/39688830/why-use-develop-guice-when-you-have-spring-and-dagger)).
+
+---
+### rule 6 Avoid creating unnecessary objects
+---
+
+[same as second edition](https://github.com/quddnr153/effective-java/tree/master/second-edition#rule-5-%EB%B6%88%ED%95%84%EC%9A%94%ED%95%9C-%EA%B0%9D%EC%B2%B4%EB%8A%94-%EB%A7%8C%EB%93%A4%EC%A7%80-%EB%A7%90%EB%9D%BC)
+
+3 판 에서는 2 판과 다른 예를 보여줬다.
+
+```java
+public class RomanNumerals {
+  static boolean isRomanNumeral(String s) {
+    return s.matches("^(?=.)M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$");
+  }
+}
+```
+
+솔직히 위 예제에서 문제점을 찾으라면, 이 책을 읽기 전에는 저 match 안에 들어가는 정규식을 상수화 했으면 좋겠다는 생각만 있었다.
+
+하지만, 문제가 하나 더 있었다.
+
+```String.matches``` 를 보면 ```Pattern.comile``` 을 호출하면서 새로운 instance를 생성해 사용한다. 당연히 재사용하지 않고 매번 새로운 instance 를 생성하게 된다.
+
+그럼 위 method 가 반복적으로 호출이 된다면, 성능상 문제가 생기게 돼있다.
+
+그럼 어떡할까?
+
+1. 처음 말한 내용 처럼 정규식에 이름을 주자
+2. 동시에 Pattern 의 객체를 재사용하도록 해주자
+
+그럼 아래와 같은 객체가 형성이 된다.
+
+```java
+public class RomanNumerals {
+  private static final Pattern ROMAN = Pattern.compile("^(?=.)M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$");
+  
+  static boolean isRomanNumeral(String s) {
+    return ROMAN.matcher(s).matches();
+  }
+}
+```
+
+---
+교훈을 적어보자.
+
+1. Java API 가 잘 만들어져 있겠지? 라고 생각하지 말고 우선 사용하는 API 에 대해 파악하고 사용하자.
+2. autoboxing 을 피하기 위해서는 통일된 type 을 사용하자 (보통은 primitive type 을 선호 한다.).
