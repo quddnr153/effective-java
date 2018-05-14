@@ -13,6 +13,7 @@
     + [rule 4 Enforce noninstantiability with a private constructor](#rule-4-enforce-noninstantiability-with-a-private-constructor)
     + [rule 5 Prefer dependency injection to hardwiring resources](#rule-5-prefer-dependency-injection-to-hardwiring-resources)
     + [rule 6 Avoid creating unnecessary objects](#rule-6-avoid-creating-unnecessary-objects)
+    + [rule 9 Prefer try-with-resources to try-finally](#rule-9-prefer-try-with-resources-to-try-finally)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -370,3 +371,41 @@ public class RomanNumerals {
 
 1. Java API 가 잘 만들어져 있겠지? 라고 생각하지 말고 우선 사용하는 API 에 대해 파악하고 사용하자.
 2. autoboxing 을 피하기 위해서는 통일된 type 을 사용하자 (보통은 primitive type 을 선호 한다.).
+
+---
+### rule 9 Prefer try-with-resources to try-finally
+---
+
+Java API 에는 ```InputStream```, ```OuputStream```, ```Connection``` 과 같이 resource 를 직접 close 해줘야 하는 API 들이 있다.
+
+보통 Java 7 이전 까지는 아래 convention 을 따랐다 ([Java doc ref](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html)).
+
+```java
+static String readFirstLineFromFileWithFinallyBlock(String path) throws IOException {
+    BufferedReader br = new BufferedReader(new FileReader(path));
+    try {
+        return br.readLine();
+    } finally {
+        if (br != null) br.close();
+    }
+}
+```
+
+하지만 Java 7 부터는 ```java.lang.AutoCloseable``` interface 가 추가 되면서, 이 interface 를 구현한 Object 는 try-with-reources 를 사용할 수 있다.
+
+그럼 뭔지 한번 봐보자.
+
+```java
+static String readFirstLineFromFile(String path) throws IOException {
+    try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+        return br.readLine();
+    }
+}
+```
+
+위와 같이 resource 를 close 해줘야 하는 객체를 try (...) 안에 선언해 주면 boilerplate 를 없앨 수 있다.
+
+***try-with-resources*** 를 사용하면 clearer, shorter 하다.
+
+---
+Java 7 이상을 사용한다면, try-with-resources 구문을 사용하도록 하자!
