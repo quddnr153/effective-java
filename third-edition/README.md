@@ -380,7 +380,7 @@ Java API 에는 ```InputStream```, ```OuputStream```, ```Connection``` 과 같�
 
 보통 Java 7 이전 까지는 아래 convention 을 따랐다 ([Java doc ref](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html)).
 
-```java
+```
 static String readFirstLineFromFileWithFinallyBlock(String path) throws IOException {
     BufferedReader br = new BufferedReader(new FileReader(path));
     try {
@@ -395,7 +395,7 @@ static String readFirstLineFromFileWithFinallyBlock(String path) throws IOExcept
 
 그럼 뭔지 한번 봐보자.
 
-```java
+```
 static String readFirstLineFromFile(String path) throws IOException {
     try (BufferedReader br = new BufferedReader(new FileReader(path))) {
         return br.readLine();
@@ -409,3 +409,18 @@ static String readFirstLineFromFile(String path) throws IOException {
 
 ---
 Java 7 이상을 사용한다면, try-with-resources 구문을 사용하도록 하자!
+
+---
+## Chapter 3 Methods Common to All Objects
+---
+
+```Object``` 에 정의된 non-final method (equals, hashCode, toString, clone and finalize) 에는 explicit ***general contracts*** 가 있다.
+
+위 method 를 재정의 하는 class 는 general contracts 를 따라야 한다 (Java API Specification 에 나와 있음).
+
+---
+### rule 10 Obey the general contract when overriding equals
+---
+
+[same as second edition](https://github.com/quddnr153/effective-java/blob/master/second-edition/README.md#rule-8-equals-%EB%A5%BC-%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%A0-%EB%95%8C%EB%8A%94-%EC%9D%BC%EB%B0%98-%EA%B7%9C%EC%95%BD%EC%9D%84-%EB%94%B0%EB%A5%B4%EB%9D%BC)
+
