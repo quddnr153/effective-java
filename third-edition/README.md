@@ -279,3 +279,46 @@ Utility class 를 만들게 된다면 주의해야 할 점이 있다
 모든 공통 작업들을 하나의 utility class 에 넣지말자...
 
 - utility class 는 stateless 해야 한다!!
+
+---
+### rule 5 Prefer dependency injection to hardwiring resources
+---
+
+***resource 를 고정하지말고 DI ([dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)) 을 사용하라*** 라는 말이다.
+
+rule 4 에서의 static utility class 와 rule 3 에서의 singleton 은 내부 resource 가 변경되서는 안되는 rule 들 이다.
+
+즉, static utility class 에서는 state 를 가지고 있으면 안되고, singleton 은 instance 가 하나만 생성 되기 때문에, 내부 resource 를 변경한다면, 동시성 문제등 아주 심각한 문제를 유발 할 수 있다.
+
+그렇기에 이번 rule 은 DI 를 사용하라고 권장한다.
+
+> Static utility classes and singletons are inappropriate for classes whose behavior is parameterized by an underlying resources.
+
+DI 를 사용한다면,
+
+- immutability
+- 여러 clients 가 객체를 공유할 수 있음
+- flexibility
+- testability
+- reusability
+
+위의 장점이 있다.
+
+그렇다면 어떻게 DI 를 적용할 수 있을까?
+
+1. Constructors
+2. Static factories
+3. Builders
+
+Java 에서 DI framework 로는
+
+1. [Dagger by google](https://google.github.io/dagger/)
+2. [Guice by google](https://github.com/google/guice)
+3. [Spring](https://projects.spring.io/spring-framework/)
+
+가 있다.
+
+---
+DI framework 중 대부분 실무에서 Spring 을 많이 사용할 것이다.
+
+그래도 위 세 가지 framework 를 비교한 argument 를 참조해 보자 ([see more](https://stackoverflow.com/questions/39688830/why-use-develop-guice-when-you-have-spring-and-dagger)).
