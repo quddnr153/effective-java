@@ -14,6 +14,9 @@
     + [rule 5 Prefer dependency injection to hardwiring resources](#rule-5-prefer-dependency-injection-to-hardwiring-resources)
     + [rule 6 Avoid creating unnecessary objects](#rule-6-avoid-creating-unnecessary-objects)
     + [rule 9 Prefer try-with-resources to try-finally](#rule-9-prefer-try-with-resources-to-try-finally)
+  * [Chapter 3 Methods Common to All Objects](#chapter-3-methods-common-to-all-objects)
+    + [rule 10 Obey the general contract when overriding equals](#rule-10-obey-the-general-contract-when-overriding-equals)
+    + [rule 11 Always ***override*** hashCode when you override ***equals***](#rule-11-always----override----hashcode-when-you-override----equals---)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -424,3 +427,54 @@ Java 7 이상을 사용한다면, try-with-resources 구문을 사용하도록 �
 
 [same as second edition](https://github.com/quddnr153/effective-java/blob/master/second-edition/README.md#rule-8-equals-%EB%A5%BC-%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%A0-%EB%95%8C%EB%8A%94-%EC%9D%BC%EB%B0%98-%EA%B7%9C%EC%95%BD%EC%9D%84-%EB%94%B0%EB%A5%B4%EB%9D%BC)
 
+---
+### rule 11 Always ***override*** hashCode when you override ***equals***
+---
+
+[same as second edition rule 9](https://github.com/quddnr153/effective-java/blob/master/second-edition/README.md#rule-9-equals-%EB%A5%BC-%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%A0-%EB%95%8C%EB%8A%94-%EB%B0%98%EB%93%9C%EC%8B%9C-hashcode-%EB%8F%84-%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%98%EB%9D%BC)
+
+---
+second edition 에 정리한 내용에 Java 7 에서 추가된 ```Object.hash()``` 에 대해 언급했었다.
+
+3판을 읽으면서 놓친 부분을 추가적으로 설명하자면,
+
+```Objects.hash()``` 는 arguments 들을 넘기고 이는 array 생성 뿐만 아니라, arguments 가 primitive type 이라면 boxing 과 unboxing 으로 느리게 동작하게 된다.
+
+성능이 주요 이슈 사항이 아닌 경우라면 사용해도 상관없지만, 성능이 중요한 시스템에서는 hash code 를 사용할 때마다 계속 계산하는 것보다 아래와 같이 caching 을 고려해 봐야한다.
+
+```java
+public class Employee {
+    private int seq;
+    private String name;
+    private String id;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Employee employee = (Employee) obj;
+        return seq == employee.seq && Objects.equals(name, employee.name) && Objects.equals(id, employee.id);
+    }
+
+    // hashCode method with lazily initialized cached hash code
+    // Automatically initialized to 0
+    private int hashCode;
+
+    @Override
+    public int hashCode() {
+        int result = hashCode;
+
+        if (result == 0) {
+            result = Integer.hashCode(seq);
+            result = 31 * result + name.hashCode();
+            result = 31 * result + id.hashCode();
+        }
+
+        return result;
+    }
+}
+```
