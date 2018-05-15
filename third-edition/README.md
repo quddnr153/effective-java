@@ -17,6 +17,7 @@
   * [Chapter 3 Methods Common to All Objects](#chapter-3-methods-common-to-all-objects)
     + [rule 10 Obey the general contract when overriding equals](#rule-10-obey-the-general-contract-when-overriding-equals)
     + [rule 11 Always ***override*** hashCode when you override ***equals***](#rule-11-always----override----hashcode-when-you-override----equals---)
+    + [rule 12 Always override toString](#rule-12-always-override-tostring)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -478,3 +479,16 @@ public class Employee {
     }
 }
 ```
+
+---
+### rule 12 Always override toString
+---
+
+[same as second edition rule 10](https://github.com/quddnr153/effective-java/blob/master/second-edition/README.md#rule-10-tostring-%EC%9D%80-%ED%95%AD%EC%83%81-%EC%9E%AC%EC%A0%95%EC%9D%98%ED%95%98%EB%9D%BC)
+
+---
+logging framework 를 사용할 때, 버전까지 자세히 기억이 안나지만, toString 을 구현안한 객체는 Object 의 toString 을 보여주기 때문에 아주 쓸모없는 로그를 남기게된다.
+
+2판에서 요약한 내용을 지켜서 toString 을 override 하도록 하자.
+
+> The ```toString``` method should return a concise, useful description of the object, in an aesthetically pleasing format.
