@@ -18,6 +18,7 @@
     + [rule 10 Obey the general contract when overriding equals](#rule-10-obey-the-general-contract-when-overriding-equals)
     + [rule 11 Always ***override*** hashCode when you override ***equals***](#rule-11-always----override----hashcode-when-you-override----equals---)
     + [rule 12 Always override toString](#rule-12-always-override-tostring)
+    + [rule 14 Consider implement Comparable](#rule-14-consider-implement-comparable)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -492,3 +493,49 @@ logging framework 를 사용할 때, 버전까지 자세히 기억이 안나지�
 2판에서 요약한 내용을 지켜서 toString 을 override 하도록 하자.
 
 > The ```toString``` method should return a concise, useful description of the object, in an aesthetically pleasing format.
+
+---
+### rule 14 Consider implement Comparable
+---
+
+```Comparable``` interface 를 구현하는 클래스의 instance 들은 natural ordering 을 가진다.
+
+```java
+public interface Comparable<T> {
+    public int compareTo(T o);
+}
+```
+
+예를 들면, ```Integer``` class 를 보자.
+
+```java
+public final class Integer extends Number implements Comparable<Integer> {
+    // 생략
+    
+    public int compareTo(Integer anotherInteger) {
+            return compare(this.value, anotherInteger.value); 
+    }
+    
+    public static int compare(int x, int y) {
+        return (x < y) ? -1 : ((x == y) ? 0 : 1);
+    }
+}
+```
+
+위와 같이 ```Comparable``` 을 구현하면, 다양한 generic algorithms 과 collection implementations 들에 호환성을 갖게 된다 (아주 작은 노력으로 엄청난 효과를 볼수 있다).
+
+- ```Arrays.sort()``` 를 사용하여 정렬이 쉬움
+- 검색하거나 Min / Max 값을 계산히기 쉬움
+- 등등
+
+[The general contract of the compareTo method](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html)
+
+---
+second edition 에서는 compareTo method 를 구현 할 때, ```<``` 와 ```>``` operators 를 사용해서 integral primitive fields 를 비교하라고 설명했다.
+
+하지만, Java 7 부터는 static compare methods 가 추가 됐다. 그렇기 때문에, 이전 버전에서 설명한 relational operators 를 이용해서 구현하는 것은 verbose and error-prone and 더 이상 추천하는 방식이 아니다.
+
+또한, Java 8 에서 comparator construction methods 가 추가 되면서, 더 손 쉽게 ```comparable``` 을 구현할 수 있게 됐다 ([예제 코드 23 line](https://github.com/quddnr153/effective-java/blob/master/third-edition/src/main/java/bw/effective/java/rule01/ComparatorInterfaceUsage.java)).
+
+```Comparator``` interface 를 참고하면 아주 유용한 method 들이 추가된 것을 볼 수 있다 ([Comparator interface api](https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html))
+
