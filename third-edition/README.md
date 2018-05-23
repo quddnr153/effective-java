@@ -16,9 +16,11 @@
     + [rule 9 Prefer try-with-resources to try-finally](#rule-9-prefer-try-with-resources-to-try-finally)
   * [Chapter 3 Methods Common to All Objects](#chapter-3-methods-common-to-all-objects)
     + [rule 10 Obey the general contract when overriding equals](#rule-10-obey-the-general-contract-when-overriding-equals)
-    + [rule 11 Always ***override*** hashCode when you override ***equals***](#rule-11-always----override----hashcode-when-you-override----equals---)
+    + [rule 11 Always ***override*** hashCode when you override ***equals***](#rule-11-always-override-hashcode-when-you-override-equals)
     + [rule 12 Always override toString](#rule-12-always-override-tostring)
     + [rule 14 Consider implement Comparable](#rule-14-consider-implement-comparable)
+  * [Chapter 3 Classes and Interfaces](#chapter-3-classes-and-interfaces)
+    + [rule 15 Minimize the accessibility of classes and members](#rule-15-minimize-the-accessibility-of-classes-and-members)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -538,4 +540,20 @@ second edition 에서는 compareTo method 를 구현 할 때, ```<``` 와 ```>``
 또한, Java 8 에서 comparator construction methods 가 추가 되면서, 더 손 쉽게 ```comparable``` 을 구현할 수 있게 됐다 ([예제 코드 23 line](https://github.com/quddnr153/effective-java/blob/master/third-edition/src/main/java/bw/effective/java/rule01/ComparatorInterfaceUsage.java)).
 
 ```Comparator``` interface 를 참고하면 아주 유용한 method 들이 추가된 것을 볼 수 있다 ([Comparator interface api](https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html))
+
+---
+## Chapter 3 Classes and Interfaces
+---
+
+---
+### rule 15 Minimize the accessibility of classes and members
+---
+
+[same as second edition rule 13](https://github.com/quddnr153/effective-java/blob/master/second-edition/README.md#rule-13-%ED%81%B4%EB%9E%98%EC%8A%A4%EC%99%80-%EB%A9%A4%EB%B2%84%EC%9D%98-%EC%A0%91%EA%B7%BC-%EA%B6%8C%ED%95%9C%EC%9D%80-%EC%B5%9C%EC%86%8C%ED%99%94%ED%95%98%EB%9D%BC)
+
+class 와 member 의 accessibility 에 관련해서 Java 9 부터 추가된 feature 가 있다.
+
+***Modules***
+- [oracle ref](https://www.oracle.com/corporate/features/understanding-java-9-modules.html)
+- [journal dev ref](https://www.journaldev.com/13106/java-9-modules)
 
