@@ -556,4 +556,4 @@ class 와 member 의 accessibility 에 관련해서 Java 9 부터 추가된 feat
 ***Modules***
 - [oracle ref](https://www.oracle.com/corporate/features/understanding-java-9-modules.html)
 - [journal dev ref](https://www.journaldev.com/13106/java-9-modules)
-
+- [intellij - getting started](https://www.jetbrains.com/help/idea/getting-started-with-java-9-module-system.html)
