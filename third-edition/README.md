@@ -19,7 +19,7 @@
     + [rule 11 Always ***override*** hashCode when you override ***equals***](#rule-11-always-override-hashcode-when-you-override-equals)
     + [rule 12 Always override toString](#rule-12-always-override-tostring)
     + [rule 14 Consider implement Comparable](#rule-14-consider-implement-comparable)
-  * [Chapter 3 Classes and Interfaces](#chapter-3-classes-and-interfaces)
+  * [Chapter 4 Classes and Interfaces](#chapter-3-classes-and-interfaces)
     + [rule 15 Minimize the accessibility of classes and members](#rule-15-minimize-the-accessibility-of-classes-and-members)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
@@ -542,7 +542,7 @@ second edition 에서는 compareTo method 를 구현 할 때, ```<``` 와 ```>``
 ```Comparator``` interface 를 참고하면 아주 유용한 method 들이 추가된 것을 볼 수 있다 ([Comparator interface api](https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html))
 
 ---
-## Chapter 3 Classes and Interfaces
+## Chapter 4 Classes and Interfaces
 ---
 
 ---
