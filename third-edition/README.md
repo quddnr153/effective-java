@@ -557,3 +557,27 @@ class 와 member 의 accessibility 에 관련해서 Java 9 부터 추가된 feat
 - [oracle ref](https://www.oracle.com/corporate/features/understanding-java-9-modules.html)
 - [journal dev ref](https://www.journaldev.com/13106/java-9-modules)
 - [intellij - getting started](https://www.jetbrains.com/help/idea/getting-started-with-java-9-module-system.html)
+
+---
+### rule 16 In public classes, use accessor methods, not public fields
+---
+
+```java
+// NOT RECOMMENDED
+class Point {
+    public double x;
+    public double y;
+}
+```
+
+Java 를 알고 OOP 를 공부했다면, 위와 같은 코드를 작성하는 사람은 없을 것이다.
+
+Fields 인 x, y 가 외부로 공개 (Information hiding 위반) 되면서 아래와 같은 *Encapsulation* 의 장점을 제공하지 못한다 ([ref 1](https://www.quora.com/What-is-the-primary-benefit-of-Encapsulation), [ref 2](http://www.cems.uwe.ac.uk/~jsa/UMLJavaShortCourse09/CGOutput/Unit3/unit3(0809)/page_13.htm)).
+
+- Encapsulation promotes maintenance
+- Code changes can be made independently
+- Increases usability
+
+보통은 Java API 를 참고하면서 개발을 하면 좋을 텐데, 예외의 경우가 있다.
+
+```java.awt``` package 에 있는 ```Point``` class 와 ```Dimension``` class 는 fields 가 public 으로 선언 돼 있다. 따라하면 안되는 부분이므로 넘어가도록 하자!!
