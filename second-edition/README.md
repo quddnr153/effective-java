@@ -1,5 +1,47 @@
 # effective-java-2e
 
+- [effective-java-2e](#effective-java-2e)
+  * [Reference](#reference)
+  * [Introduction](#introduction)
+    + [Rule 1 생성자 대신 정적 팩터리 메서드를 사용할 수 없는지 생각해 보라](#rule-1-생성자-대신-정적-팩터리-메서드를-사용할-수-없는지-생각해-보라)
+    + [Rule 2 생성자 인자가 많을 때는 Builder 패턴 적용을 고려하라](#rule-2-생성자-인자가-많을-때는-builder-패턴-적용을-고려하라)
+    + [Rule 3 private 생성자나 enum 자료형은 싱글턴 패턴을 따르도록 설계하라](#rule-3-private-생성자나-enum-자료형은-싱글턴-패턴을-따르도록-설계하라)
+    + [Rule 4 객체 생성을 막을 때는 private 생성자를 사용하라](#rule-4-객체-생성을-막을-때는-private-생성자를-사용하라)
+    + [Rule 5 불필요한 객체는 만들지 말라](#rule-5-불필요한-객체는-만들지-말라)
+    + [Rule 8 equals 를 재정의할 때는 일반 규약을 따르라](#rule-8-equals-를-재정의할-때는-일반-규약을-따르라)
+    + [Rule 9 equals 를 재정의할 때는 반드시 hashCode 도 재정의하라](#rule-9-equals-를-재정의할-때는-반드시-hashcode-도-재정의하라)
+    + [Rule 10 toString 은 항상 재정의하라](#rule-10-tostring-은-항상-재정의하라)
+    + [Rule 12 Comparable 구현을 고려하라](#rule-12-comparable-구현을-고려하라)
+    + [Rule 13 클래스와 멤버의 접근 권한은 최소화하라](#rule-13-클래스와-멤버의-접근-권한은-최소화하라)
+    + [Rule 14 public 클래스 안에는 public 필드를 두지 말고 접근자 메서드를 사용하라](#rule-14-public-클래스-안에는-public-필드를-두지-말고-접근자-메서드를-사용하라)
+    + [Rule 15 변경 가능성을 최소화하라](#rule-15-변경-가능성을-최소화하라)
+    + [Rule 16 계승 (Inheritance)하는 대신 구성 (Composition)하라](#rule-16-계승-inheritance하는-대신-구성-composition하라)
+    + [Abstract class 대신 Interface 를 사용하라](#abstract-class-대신-interface-를-사용하라)
+    + [인터페이스는 자료형을 정의할 때만 사용하라](#인터페이스는-자료형을-정의할-때만-사용하라)
+    + [Rule 20 태그 달린 클래스 대신 클래스 계층을 활용하라](#rule-20-태그-달린-클래스-대신-클래스-계층을-활용하라)
+    + [Rule 21 전략을 표현하고 싶을 때는 함수 객체를 사용하라](#rule-21-전략을-표현하고-싶을-때는-함수-객체를-사용하라)
+    + [rule 24 unchecked warning 을 제거하라](#rule-24-unchecked-warning-을-제거하라)
+    + [rule 38 인자의 유효성을 검사하라](#rule-38-인자의-유효성을-검사하라)
+    + [rule 40 method signature 는 신중하게 설계하라](#rule-40-method-signature-는-신중하게-설계하라)
+    + [rule 43 null 대신 빈 배열이나 컬렉션을 반환하라](#rule-43-null-대신-빈-배열이나-컬렉션을-반환하라)
+    + [rule 45 지역 변수의 유효범위를 최소화하라](#rule-45-지역-변수의-유효범위를-최소화하라)
+    + [rule 47 어떤 라이브러리가 있는지 파악하고, 적절히 활용하라](#rule-47-어떤-라이브러리가-있는지-파악하고-적절히-활용하라)
+    + [rule 49 객체화된 기본 자료형 대신 기본 자료형을 이용하라](#rule-49-객체화된-기본-자료형-대신-기본-자료형을-이용하라)
+    + [rule 50 다른 자료형이 적절하다면 문자열 사용은 피하라](#rule-50-다른-자료형이-적절하다면-문자열-사용은-피하라)
+    + [rule 51 문자열 연결 시 성능에 주의하라](#rule-51-문자열-연결-시-성능에-주의하라)
+    + [rule 52 객체를 참조할 때는 그 인터페이스를 사용하라](#rule-52-객체를-참조할-때는-그-인터페이스를-사용하라)
+    + [rule 55 신중하게 최적화하라](#rule-55-신중하게-최적화하라)
+    + [rule 56 일반적으로 통용되는 작명 관습을 따르라](#rule-56-일반적으로-통용되는-작명-관습을-따르라)
+    + [rule 57 예외는 예외적인 상황에만 사용하라](#rule-57-예외는-예외적인-상황에만-사용하라)
+    + [rule 58 복구 가능 상태에는 점검지정 예외를 사용하고, 프로그래밍 오류에는 실행시점 예외를 사용하라](#rule-58-복구-가능-상태에는-점검지정-예외를-사용하고-프로그래밍-오류에는-실행시점-예외를-사용하라)
+    + [rule 60 표준 예외를 사용하라](#rule-60-표준-예외를-사용하라)
+    + [rule 63 어떤 오류인지를 드러내는 정보를 상세한 메시지에 담으라](#rule-63-어떤-오류인지를-드러내는-정보를-상세한-메시지에-담으라)
+    + [rule 65 예외를 무시하지 마라](#rule-65-예외를-무시하지-마라)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
+
 ## Reference
 
 [Effective java 2rd](https://www.amazon.com/Effective-Java-2nd-Joshua-Bloch/dp/0321356683)
@@ -637,7 +679,7 @@ immutable class 는 아래 규칙을 따르면 된다:
 1. 변경 불가능 객체는 단순하다.
 2. 변경 불가능 객체는 스레드에 안전 (thread-safe) 할 수밖에 없다. 어떤 동기화도 필요 없다.
 3. 자유롭게 공유가 가능
-4. 변경 불가능한 객체는 그 내부도 공유할 수 있따.
+4. 변경 불가능한 객체는 그 내부도 공유할 수 있다.
 5. 변경 불가능 객체는 다른 객체의 구성요소로도 훌륭하다.
 
 하지만 단점으로는:
