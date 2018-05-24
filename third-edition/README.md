@@ -21,6 +21,7 @@
     + [rule 14 Consider implement Comparable](#rule-14-consider-implement-comparable)
   * [Chapter 4 Classes and Interfaces](#chapter-3-classes-and-interfaces)
     + [rule 15 Minimize the accessibility of classes and members](#rule-15-minimize-the-accessibility-of-classes-and-members)
+    + [rule 17 Minimize mutability](rule-17-Minimize-mutability)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -581,3 +582,17 @@ Fields 인 x, y 가 외부로 공개 (Information hiding 위반) 되면서 아�
 보통은 Java API 를 참고하면서 개발을 하면 좋을 텐데, 예외의 경우가 있다.
 
 ```java.awt``` package 에 있는 ```Point``` class 와 ```Dimension``` class 는 fields 가 public 으로 선언 돼 있다. 따라하면 안되는 부분이므로 넘어가도록 하자!!
+
+---
+### rule 17 Minimize mutability
+---
+
+[same as second edition rule 15](https://github.com/quddnr153/effective-java/blob/master/second-edition/README.md#rule-15-%EB%B3%80%EA%B2%BD-%EA%B0%80%EB%8A%A5%EC%84%B1%EC%9D%84-%EC%B5%9C%EC%86%8C%ED%99%94%ED%95%98%EB%9D%BC)
+
+Java platform libraries 에는 ```String, BigInteger, BigDecimal``` 과 같은 Immutable class 들이 있다.
+
+---
+실무에서 business logic 을 구현하다 보면, 내부의 상태를 바꾸는 객체를 개발하는 일이 많다. 하지만 조금만 더 잘 생각해 본다면, immutable 하게 개발 할 수 있다.
+
+팁이 하나 있다면, 객체의 상태를 바꿀 때, 한번더 이 생각을 해보자.
+> ***정말로 여기서 객체를 수정해야 하나? 객체 생성을 수정단계에서 생성한다면 수정없이 가능하지 않을까?***
