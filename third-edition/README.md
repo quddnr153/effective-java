@@ -596,3 +596,70 @@ Java platform libraries 에는 ```String, BigInteger, BigDecimal``` 과 같은 I
 
 팁이 하나 있다면, 객체의 상태를 바꿀 때, 한번더 이 생각을 해보자.
 > ***정말로 여기서 객체를 수정해야 하나? 객체 생성을 수정단계에서 생성한다면 수정없이 가능하지 않을까?***
+
+---
+### rule 18 Favor composition over inheritance
+---
+
+[same as second edition rule 16](https://github.com/quddnr153/effective-java/blob/master/second-edition/README.md#rule-16-%EA%B3%84%EC%8A%B9-inheritance%ED%95%98%EB%8A%94-%EB%8C%80%EC%8B%A0-%EA%B5%AC%EC%84%B1-composition%ED%95%98%EB%9D%BC)
+
+세 가지 키워드를 정리해 보자.
+
+- Composition [wikipedia](https://en.wikipedia.org/wiki/Object_composition)
+
+Composition (구성) 은 객체들 사이에 "has a" 관계가를 가질 때 사용한다. 보통 composed objects 는 다른 object 의 member 로 구성한다.
+
+예를 들면, 아래와 같다.
+
+```java
+public class House {
+    private List<Door> doors;
+    private List<Window> windows;
+    // others
+}
+```
+
+위 관계를 "House 는 doors 와 windows 그리고 다르것들로 구성되어 있다." 라고 말한다.
+
+- forwarding
+
+Each instance method in the new class, invokes the corresponding method on the contained (Composed) instance of the existing class and returns the results.
+
+```java
+public class House {
+    private List<Door> doors;
+    private List<Window> windows;
+
+    // invokes the corresponding method
+    public boolean openTheDoor(String name) {
+        return doors.stream()
+                .filter(door -> door.getName().equals(name))
+                .findFirst()
+                .orElseGet(() -> new Door(name))
+                .openTheDoor(name);
+    }
+}
+```
+
+위 예제가 House 의 ```openTheDoor(String)``` method 를 호출하는 것이 구성하고 있는 door 의 ```openTheDoor(String)``` 을 호출 하고 있다.
+
+- wrapper
+
+// TODO: explain wrapper
+
+---
+Inheritance (계승) 은 두 classes 사이에 "is-a" 관계가 존재할 때 만 사용한다.
+
+> class B is a class A
+
+```java
+public class B extends A {
+    // somethings
+}
+```
+
+inheritance 를 하기 전에 스스로 질문을 해보자:
+> 정말로 B 가 A 인가? (Is every B really an A?)
+
+> 확장 (extends) 하려는 class 가 결함 (flaws) 을 가지고 있나? (Does the class that you contemplate extending have any flaws in its API?)
+
