@@ -663,3 +663,45 @@ inheritance 를 하기 전에 스스로 질문을 해보자:
 
 > 확장 (extends) 하려는 class 가 결함 (flaws) 을 가지고 있나? (Does the class that you contemplate extending have any flaws in its API?)
 
+---
+### rule 20 Prefer interfaces to abstract classes
+---
+
+자바는 multiple implementations 를 허용하는 두 가지 방법을 제공한다 (interface, abstract class).
+
+***Interfaces vs Abstract classes***
+
+가장 큰 차이는 interface 는 implements keyword 를 사용하고, abstract class 는 extends keyword 를 사용한다. 무슨 말이냐면, abstract class 를 구현하는 class 를 만들 때는 super class - sub class 관계가 강제 된다는 말이다.
+
+자바는 single inheritance 만 허용하기 때문에, 위 제약사항은 아주 큰 차이를 보이게 된다.
+
+(이 외의 차이점은 google 에 ```java interface vs abstract class``` 를 검색해보자.)
+
+- abstract class 의 inheritance 제약 사항 때문에, interface 의 장점은 기존 class 에 새로운 interface 를 새로 끼워넣기 좋다는 것이다.
+
+
+- 또한, Interface 는 mixin ([믹스인](https://en.wikipedia.org/wiki/Mixin)) 을 정의하는데 이상적이다.
+
+> a Mixin is a class that contains methods for use by other classes without having to be the parent class of those other classes. How those other classes gain access to the mixin's methods depends on the language. Mixins are sometimes described as being "included" rather than "inherited".
+
+- Interface 는 nonhierarchical type framework 를 만들 수 있도록 한다.
+
+nonhierarchical ???? 무슨말이지 (문자그대로 계층이 없다는 의미)?? 예를 보면 알기 쉽다.
+
+```java
+interface FrontEndDeveloper {
+    // do somethings
+}
+
+interface BackEndDeveloper {
+    // do somethings
+}
+
+interface FullStackDeveloper implements FrontEndDeveloper, BackEndDeveloper {
+    // do somethings
+}
+```
+
+위 예제를 보면 FontEndDeveloper 와 BackEndDeveloper 가 있고, 두 능력을 가지고 있는 사람을 우리는 FullStackDeveloper 라고 불른다 (Full-stack 개발자를 직접 본적은 없다...).
+
+이는 interface 로 선언했기에 가능한 계층구조이다.
