@@ -643,9 +643,13 @@ public class House {
 
 위 예제가 House 의 ```openTheDoor(String)``` method 를 호출하는 것이 구성하고 있는 door 의 ```openTheDoor(String)``` 을 호출 하고 있다.
 
-- wrapper
+- wrapper (aka, ***Decorator*** pattern - [ref](http://www.javapractices.com/topic/TopicAction.do?Id=258))
 
-// TODO: explain wrapper
+> The basic idea of a wrapper is to call-forward to an underlying object, while simultaneously allowing for new code to be executed just before and/or just after the call. Wrappers can be chained together, one after another. In this way, you can mix-and-match behaviors in various ways.
+
+Wrapper 의 기본 원리는 underlying object (원시 객체) 의 호출 직전 혹은 직후에 새로운 코드를 실행하도록 call-forward 하는 것이다. Wrappers 는 차례로 연결 될 수 있기에, 다양한 방법으로 동작을 짜 맞출 (mix-and-match) 수 있다.
+
+Wrapper 를 사용 하면 클래스의 구현을 변경할 필요 없고 클래스를 확장할 필요 없이 객체의 동작이 변경된다.
 
 ---
 Inheritance (계승) 은 두 classes 사이에 "is-a" 관계가 존재할 때 만 사용한다.
