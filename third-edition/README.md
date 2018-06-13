@@ -16,12 +16,15 @@
     + [rule 9 Prefer try-with-resources to try-finally](#rule-9-prefer-try-with-resources-to-try-finally)
   * [Chapter 3 Methods Common to All Objects](#chapter-3-methods-common-to-all-objects)
     + [rule 10 Obey the general contract when overriding equals](#rule-10-obey-the-general-contract-when-overriding-equals)
-    + [rule 11 Always ***override*** hashCode when you override ***equals***](#rule-11-always-override-hashcode-when-you-override-equals)
+    + [rule 11 Always ***override*** hashCode when you override ***equals***](#rule-11-always----override----hashcode-when-you-override----equals---)
     + [rule 12 Always override toString](#rule-12-always-override-tostring)
     + [rule 14 Consider implement Comparable](#rule-14-consider-implement-comparable)
-  * [Chapter 4 Classes and Interfaces](#chapter-3-classes-and-interfaces)
+  * [Chapter 4 Classes and Interfaces](#chapter-4-classes-and-interfaces)
     + [rule 15 Minimize the accessibility of classes and members](#rule-15-minimize-the-accessibility-of-classes-and-members)
-    + [rule 17 Minimize mutability](rule-17-Minimize-mutability)
+    + [rule 16 In public classes, use accessor methods, not public fields](#rule-16-in-public-classes--use-accessor-methods--not-public-fields)
+    + [rule 17 Minimize mutability](#rule-17-minimize-mutability)
+    + [rule 18 Favor composition over inheritance](#rule-18-favor-composition-over-inheritance)
+    + [rule 20 Prefer interfaces to abstract classes](#rule-20-prefer-interfaces-to-abstract-classes)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -650,6 +653,8 @@ public class House {
 Wrapper 의 기본 원리는 underlying object (원시 객체) 의 호출 직전 혹은 직후에 새로운 코드를 실행하도록 call-forward 하는 것이다. Wrappers 는 차례로 연결 될 수 있기에, 다양한 방법으로 동작을 짜 맞출 (mix-and-match) 수 있다.
 
 Wrapper 를 사용 하면 클래스의 구현을 변경할 필요 없고 클래스를 확장할 필요 없이 객체의 동작이 변경된다.
+
+[Wrapper Demo](https://github.com/quddnr153/effective-java/blob/master/third-edition/src/main/java/bw/effective/java/rule18/WrapperDemo.java)
 
 ---
 Inheritance (계승) 은 두 classes 사이에 "is-a" 관계가 존재할 때 만 사용한다.
