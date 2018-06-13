@@ -719,3 +719,24 @@ interface FullStackDeveloper implements FrontEndDeveloper, BackEndDeveloper {
 
 // TODO: Skeletal implementation
 
+---
+### rule 21 Design interfaces for posterity
+---
+
+제목 의미: interface 설계를 잘 하자!!! 라는 의미 (미래의 나 혹은 다른 개발자들을 위해서)
+
+Java 8 이전에는 구현체를 깨트리지 않고 interface 에 methods 를 추가하는 것은 불가능 했다.
+
+하지만 Java 8 부터는 ***[default method](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html)*** 가 추가 되었다.
+
+> Default methods enable you to add new functionality to the interfaces of your libraries and ensure binary compatibility with code written for older versions of those interfaces.
+
+---
+주로 Java 8 의 Lambdas 의 사용을 용이하게 하기 위해서 core collection interfaces (Collection, List, Map 등) 에 default methods 가 추가 되었다.
+
+실상 위 default method 의 추가로 existing implementation 이 안전하게 동작한다는 것은 아니다.
+
+널리 사용 되는 interface 를 만들었다면, 당연히 default method 의 추가는 조심히 해야한다. release 전에 테스트를 확실히 해야한다는 의미다.
+
+당연 내부적으로 사용하는 interface 였다면, 간단히 추가할 수 있을 것이다.
+
