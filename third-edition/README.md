@@ -28,6 +28,7 @@
     + [rule 21 Design interfaces for posterity](#rule-21-design-interfaces-for-posterity)
     + [rule 22 Use interfaces only to define types](#rule-22-use-interfaces-only-to-define-types)
     + [rule 23 Prefer class hierarchies to tagged classes](#rule-23-prefer-class-hierarchies-to-tagged-classes)
+  * [Chapter 7 Lambdas and Streams](#chapter-7-lambdas-and-streams)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -792,3 +793,28 @@ public class PhysicalConstants {
 ---
 요약하자면, tagged class 는 좋은 사용법이 아니다. tag field 를 사용하려 한다면 계층구조로 class 를 설계하는 것을 생각해 봐라. 또한 기존 class 가 tag field 를 가지고 있다면, refactoring 해라 나중을 위해서.
 
+---
+## Chapter 7 Lambdas and Streams
+---
+
+Java 8 에는 function objects 를 쉽게 create 하도록 Functional interfaces, lambdas, method references 가 추가 되었다.
+
+data elements 의 sequence or parallel 처리를 위한 Stream API 도 추가 됐다.
+
+oracle articles
+
+- http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html#features
+
+---
+***Function objects***
+
+무슨 말이지? function objects??
+
+글자 그대로 function 이고 object 인! 함수를 function objects (aka functor by Haskell) 라고 한다.
+
+여기서 추가로 나오는 용어는 first class (일급 객체) 이다.
+
+Java 8 이전에 Java 의 ```Function``` 은 first class 가 아니 였다.
+하지만, Java 8 부터는 function 을 arguments, return type, data structure 에서 사용할 수 있게 되었다. 그러므로 우리는 Java 8 에서 function 을 first class 라, function objects 라 부를 수 있게 된 것이다.
+
+추가적인 Functional Programming 에 대한 내용은 따로 정리해보자 (TODO).
