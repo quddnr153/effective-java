@@ -17,7 +17,7 @@
     + [Rule 15 변경 가능성을 최소화하라](#rule-15-변경-가능성을-최소화하라)
     + [Rule 16 계승 (Inheritance)하는 대신 구성 (Composition)하라](#rule-16-계승-inheritance하는-대신-구성-composition하라)
     + [Rule 18 Abstract class 대신 Interface 를 사용하라](#rule-18-abstract-class-대신-interface-를-사용하라)
-    + [인터페이스는 자료형을 정의할 때만 사용하라](#인터페이스는-자료형을-정의할-때만-사용하라)
+    + [Rule 19 인터페이스는 자료형을 정의할 때만 사용하라](#rule-19-인터페이스는-자료형을-정의할-때만-사용하라)
     + [Rule 20 태그 달린 클래스 대신 클래스 계층을 활용하라](#rule-20-태그-달린-클래스-대신-클래스-계층을-활용하라)
     + [Rule 21 전략을 표현하고 싶을 때는 함수 객체를 사용하라](#rule-21-전략을-표현하고-싶을-때는-함수-객체를-사용하라)
     + [rule 24 unchecked warning 을 제거하라](#rule-24-unchecked-warning-을-제거하라)
@@ -717,7 +717,7 @@ immutable class 의 대표적인 예는 java.lang.String 이다.
 - 인터페이스를 사용하면 wrapper class idiom 을 통해 (Rule 16) 안전하면서도 강력한 기능 개선이 가능하다.
 
 ---
-### 인터페이스는 자료형을 정의할 때만 사용하라
+### Rule 19 인터페이스는 자료형을 정의할 때만 사용하라
 ---
 
 인터페이스를 구현하는 클래스를 만들게 되면, 그 인터페이스는 해당 클래스의 객체를 참조할 수 있는 자료형 (type) 역할을 하게 된다.
