@@ -25,6 +25,9 @@
     + [rule 17 Minimize mutability](#rule-17-minimize-mutability)
     + [rule 18 Favor composition over inheritance](#rule-18-favor-composition-over-inheritance)
     + [rule 20 Prefer interfaces to abstract classes](#rule-20-prefer-interfaces-to-abstract-classes)
+    + [rule 21 Design interfaces for posterity](#rule-21-design-interfaces-for-posterity)
+    + [rule 22 Use interfaces only to define types](#rule-22-use-interfaces-only-to-define-types)
+    + [rule 23 Prefer class hierarchies to tagged classes](#rule-23-prefer-class-hierarchies-to-tagged-classes)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -779,4 +782,13 @@ public class PhysicalConstants {
     public static final double AVOGADROS_NUMBER = 6.022_140_857e23;
 }
 ```
+
+---
+### rule 23 Prefer class hierarchies to tagged classes
+---
+
+[same as second edition](https://github.com/quddnr153/effective-java/blob/master/second-edition/README.md#rule-20-%ED%83%9C%EA%B7%B8-%EB%8B%AC%EB%A6%B0-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%8C%80%EC%8B%A0-%ED%81%B4%EB%9E%98%EC%8A%A4-%EA%B3%84%EC%B8%B5%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%98%EB%9D%BC)
+
+---
+요약하자면, tagged class 는 좋은 사용법이 아니다. tag field 를 사용하려 한다면 계층구조로 class 를 설계하는 것을 생각해 봐라. 또한 기존 class 가 tag field 를 가지고 있다면, refactoring 해라 나중을 위해서.
 
