@@ -740,3 +740,43 @@ Java 8 이전에는 구현체를 깨트리지 않고 interface 에 methods 를 �
 
 당연 내부적으로 사용하는 interface 였다면, 간단히 추가할 수 있을 것이다.
 
+---
+### rule 22 Use interfaces only to define types
+---
+
+[same as second edition](https://github.com/quddnr153/effective-java/blob/master/second-edition/README.md#rule-19-%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4%EB%8A%94-%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84-%EC%A0%95%EC%9D%98%ED%95%A0-%EB%95%8C%EB%A7%8C-%EC%82%AC%EC%9A%A9%ED%95%98%EB%9D%BC)
+
+Interface 에 상수들을 정의해서 사용하는 경우들을 종종 보곤 한다.
+
+```java
+// do not use
+public interface PhysicalConstants {
+    static final double AVOGADROS_NUMBER = 6.022_140_857e23;
+    // ...
+}
+```
+
+***이건 당연히 잘못된 사용이다.***
+
+그럼 어떻게 하면 좋을까??
+
+아래와 같이 enum type 을 사용하거나 non-instantiable utility class 를 사용하는 것이 적합하다.
+
+```java
+enum PhysicalConstants {
+    AVOGADROS_NUMBER(6.022_140_857e23);
+    
+    double number;
+    
+    PhysicalConstants(double number) {
+        this.number = number;
+    }
+}
+
+public class PhysicalConstants {
+    private PhysicalConstants() {}
+    
+    public static final double AVOGADROS_NUMBER = 6.022_140_857e23;
+}
+```
+
