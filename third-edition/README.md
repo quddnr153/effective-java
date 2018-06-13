@@ -714,3 +714,8 @@ interface FullStackDeveloper implements FrontEndDeveloper, BackEndDeveloper {
 위 예제를 보면 FontEndDeveloper 와 BackEndDeveloper 가 있고, 두 능력을 가지고 있는 사람을 우리는 FullStackDeveloper 라고 불른다 (Full-stack 개발자를 직접 본적은 없다...).
 
 이는 interface 로 선언했기에 가능한 계층구조이다.
+
+- Interfaces enale safe, powerful functionality enhancements via the wrapper class idiom ([wrapper demo](https://github.com/quddnr153/effective-java/blob/master/third-edition/src/main/java/bw/effective/java/rule18/WrapperDemo.java))
+
+// TODO: Skeletal implementation
+
