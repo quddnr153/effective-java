@@ -31,6 +31,7 @@
   * [Chapter 7 Lambdas and Streams](#chapter-7-lambdas-and-streams)
     + [rule 42 Prefer lambdas to anonymous classes](#rule-42-prefer-lambdas-to-anonymous-classes)
     + [rule 43 Prefer method references to lambdas](#rule-43-prefer-method-references-to-lambdas)
+    + [rule 44 Favor the use of standard functional interfaces](#rule-44-favor-the-use-of-standard-functional-interfaces)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -952,3 +953,46 @@ Java 8 부터 추가된 여러 default method, static method 들을 공부한다
 
 Java doc 을 다 외울 수 없으니, 기본적인 기능같은 경우 만들어진 method 가 있을 것이라 생각하고 찾아가면서 적용해보자!
 
+---
+### rule 44 Favor the use of standard functional interfaces
+---
+
+```java.util.function``` package 에는 43 개의 standard functional interfaces 를 제공하고 있다.
+
+본인 스스로 functional interface 를 만들기 전에 위 ```java.util.function``` package 를 먼저 찾아보길 바란다.
+
+- ***If one of the standard functional interface does the job, you should generally use it in preference to a purpose-built functional interface.***
+
+대부분의 기능은 다 지원할테니...
+
+아래 basic interface 를 기억하면, 다른 나머지 (43 개) 를 유추할 수 있을 것이다...
+
+1. Operator interface
+
+: functions whose result and argument types are the same
+: 인자와 리턴 type 이 같은 function
+
+2. Predicate interface
+
+: function that takes an argument and returns a ```boolean```
+: argument 를 받아 true or false 값인 ```boolean``` 을 리턴
+
+3. Function interface
+
+: function whose argument and return types differ
+: 인자와 리턴 type 이 다른 function
+
+4. Supplier interface
+
+: function that takes no arguments and returns (or supplies) a value
+: 인자가 없고 리턴 값을 갖는 function
+
+5. Consumer interface
+
+: function that takes an argument and returns noting (consuming its argument)
+: 인자를 받아 리턴값이 없는 function (인자를 소모한다...)
+
+---
+정말 실무에서 domain specific 한 API 를 만들지 않는 이상, 위 standard functional interface 의 사용 범위를 벗어나지 않을 것이다.
+
+ 
