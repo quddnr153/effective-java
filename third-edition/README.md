@@ -29,6 +29,7 @@
     + [rule 22 Use interfaces only to define types](#rule-22-use-interfaces-only-to-define-types)
     + [rule 23 Prefer class hierarchies to tagged classes](#rule-23-prefer-class-hierarchies-to-tagged-classes)
   * [Chapter 7 Lambdas and Streams](#chapter-7-lambdas-and-streams)
+    + [rule 42 Prefer lambdas to anonymous classes](#rule-42-prefer-lambdas-to-anonymous-classes)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -818,3 +819,96 @@ Java 8 이전에 Java 의 ```Function``` 은 first class 가 아니 였다.
 하지만, Java 8 부터는 function 을 arguments, return type, data structure 에서 사용할 수 있게 되었다. 그러므로 우리는 Java 8 에서 function 을 first class 라, function objects 라 부를 수 있게 된 것이다.
 
 추가적인 Functional Programming 에 대한 내용은 따로 정리해보자 (TODO).
+
+---
+### rule 42 Prefer lambdas to anonymous classes
+---
+
+***Anonymous classes [Oracle doc](https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html)***
+
+- 우리나라 말로 익명 클래스라 불린다
+- 클래스의 선언과 객체의 생성을 동시에 하기 때문에 단 한번만 사용될 수 있고 오직 하나의 객체만을 생성할 수 있는 일회용 클래스이다
+
+```java
+class ExampleAnonymousClass {
+    public static void main(String[] args){
+      List<String> words = Arrays.asList("hi", "hello", "there");
+      
+      Collections.sort(words, new Comparator<String>() {
+          public int compare(String s1, String s2) {
+              return Integer.compare(s1.length(), s2.length());
+          }
+      });
+    }
+}
+```
+- 위 예시를 보면 알 수 있듯이, ```words``` 를 sort 하기 위해 ```Collections.sort``` 의 두번째 인자로 Comparator 의 구현체인 익명클래스를 사용하고 있다
+
+---
+이번에는 Lambda expression 을 사용해서 위 예제를 수정해 보겠다.
+
+```java
+class ExampleLambdaExpression {
+    public static void main(String[] args){
+      List<String> words = Arrays.asList("hi", "hello", "there");
+      
+      // case 1 (specify type parameter and not)
+      Collections.sort(words, (String s1, String s2) -> Integer.compare(s1.length(), s2.length()));
+      Collections.sort(words, (s1, s2) -> Integer.compare(s1.length(), s2.length()));
+      
+      // case 2 (comparator construction method)
+      Collections.sort(words, comparingInt(String::length));
+      
+      // case 3 (List interface default method)
+      words.sort(comparingInt(String::length));
+    }
+}
+```
+
+위 예제 코드를 보면 알 수 있듯이, anonymous class 에서의 boilerplate 가 없어진 것을 볼 수 있다.
+
+어떤가?... 좀 더 명확해 보이지 않은가?? 우리가 읽어야 할 코드가 줄었고, 오히려 명확해졌다는 것을 느꼈을 것이다. 못 느껴도 상관없다... 익숙하지 않았을 뿐, 보다 보면 뭐가 더 좋은지 깨닫게 될 것이다.
+
+위 예제에서 case 1 에는 두개의 예제 코드가 있다.
+
+type 을 명시한 것과 명시하지 않은 것.
+
+어떤게 좋아보이나?
+
+아마 상황에 따라 다를 것이다.
+
+Type 을 명시해야 코드가 명확해 질 수도 있고, type 이 없어도 코드를 읽는데 문제가 없을 수 있다.
+
+그래서, 책에서는 아래와 같은 가이드를 해줬다.
+
+- ***type 이 프로그램을 명확하게 해주지 않는다면, 빼버려라! (Omit the types of all lambda parameters unless their presence makes your program clearer)***
+
+또한, lambda expression 은 class 혹은 method 들과 다르게 이름과 documentation 이 부족하다.
+
+그렇기 때문에, lambda expression 의 작업이 많아진다면, readability 가 급격히 떨어진다.
+
+- ***람다식의 작업이 자명하지 않거나, line 수가 길어진다면... (4 ~ 5 line 이상), lambda expression 에 넣지말자... (If a computation isn't self-explanatory, or exceeds a few lines, don't put it in a lambda.)***
+
+위와 같은경우 (lambda expression 이 길어질 때) 는 해결책으로 method 로 빼내는 것이다. method 에는 이름이 있기 때문에 길어진 lambda expression 의 가독성을 높여 줄 수 있다고 생각한다. (아래와 같이)
+
+```scala
+object Example {
+  def timesBy3(number: Int): Int = number * 3
+  def isEvenNumber(number: Int): Boolean = number % 2 == 0
+    
+  val numbers = (1 to 10).toList
+  
+  // 이름을 줘서 명확하게 표현
+  numbers.map(timesBy3)
+         .filter(isEvenNumber)
+  
+  // 솔직히 이정도는 이름을 안줘도 된다 (?)
+  numbers.map(_ * 3)
+         .filter(_ % 2 == 0)
+}
+```
+
+---
+아직 실무에서 Java 8 을 사용하는 곳이 많지 않아, "Lambda expression 을 통해 코드가 간결해졌다!!!" 라는 기분이 들진 않았다.
+
+하지만, Spark 개발을 할 때, 잠시 scala 를 사용 해 봤는데, 함수형 프로그래밍의 명료함 과 간결 (lambda expression 포함) 은 아주 매력적이다 라는 것을 느꼈다.
