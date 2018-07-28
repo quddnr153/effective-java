@@ -30,6 +30,7 @@
     + [rule 23 Prefer class hierarchies to tagged classes](#rule-23-prefer-class-hierarchies-to-tagged-classes)
   * [Chapter 7 Lambdas and Streams](#chapter-7-lambdas-and-streams)
     + [rule 42 Prefer lambdas to anonymous classes](#rule-42-prefer-lambdas-to-anonymous-classes)
+    + [rule 43 Prefer method references to lambdas](#rule-43-prefer-method-references-to-lambdas)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -912,3 +913,42 @@ object Example {
 아직 실무에서 Java 8 을 사용하는 곳이 많지 않아, "Lambda expression 을 통해 코드가 간결해졌다!!!" 라는 기분이 들진 않았다.
 
 하지만, Spark 개발을 할 때, 잠시 scala 를 사용 해 봤는데, 함수형 프로그래밍의 명료함 과 간결 (lambda expression 포함) 은 아주 매력적이다 라는 것을 느꼈다.
+
+---
+### rule 43 Prefer method references to lambdas
+---
+
+***Method Reference [Oracle Doc](https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html)***
+
+method reference 의 종류
+
+- Static methods
+- Instance methods
+- Constructors using new operator (Object::new)
+
+각각은 이름과 google 을 보면 사용할 수 있다.
+
+그렇다면, 아래 예시를 통해 어떻게 사용하는지 알아보자.
+
+```java
+class MethodReferenceExample {
+    public static void main(String[] args){
+      List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+      
+      System.out.println(numbers.stream().reduce((count, incr) -> count + incr));
+      System.out.println(numbers.stream().reduce(Integer::sum));
+    }
+}
+```
+
+위 두 차이를 알겠는가?
+
+- 간단하다 method reference 는 미리 정의 되어있는 method 를 사용하는 것이다.
+
+***Method Reference 를 사용할 때 더 간결하고 명확하다면, 사용하라! 그렇지 않다면 lambda expression 을 사용하라! (Where method references are shorter and clearer, use them; where they aren't, stick with lambdas.)***
+
+---
+Java 8 부터 추가된 여러 default method, static method 들을 공부한다면, method reference 를 잘 활용할 수 있을 것이다.
+
+Java doc 을 다 외울 수 없으니, 기본적인 기능같은 경우 만들어진 method 가 있을 것이라 생각하고 찾아가면서 적용해보자!
+
